@@ -1,0 +1,56 @@
+﻿@model TPS.Frontend.Infrastructure.EmployeeBalance
+
+@{
+    Layout = null;
+}
+<div class="alert alert-danger" role="alert" id="error-summary">
+</div>
+<form asp-action="AddOrEdit" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <input type="hidden" asp-for="CreateDate" />
+    <input type="hidden" asp-for="EmployeeId" />
+    <input type="hidden" asp-for="LeaveTypeName" />
+
+    <div class="form-group">
+        <label for="FullName">Employee</label>
+        <input type="text" class="col-md-12 form-control typeahead" asp-for="FullName" placeholder="Search names..." autocomplete="off" />
+    </div>
+
+    <div class="form-group">
+        <label for="LeaveTypeId">Leave Type</label>
+        <input type="hidden" disabled="disabled" asp-for="LeaveTypeId" id="hidden_leavetype" />
+        <select class="custom-select" asp-for="LeaveTypeId"></select>
+    </div>
+
+    <div class="form-group" data-target="#date-acquire" data-toggle="datetimepicker">
+        <label for="AcquireDate">Acquire</label>
+        <div class="input-group date" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" id="date-acquire" asp-for="AcquireDate" placeholder="Acquire" />
+            <div class="input-group-append">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" data-target="#date-expire" data-toggle="datetimepicker">
+        <label for="ExpireDate">Expire</label>
+        <div class="input-group date" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" id="date-expire" asp-for="ExpireDate" placeholder="Expire" />
+            <div class="input-group-append">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ApprovedQuantity">Qty</label>
+        <input type="number" class="form-control" min="1" asp-for="Quantity" placeholder="Qty" />
+    </div>
+    <div class="form-group">
+        <label for="Remarks">Remarks</label>
+        <input type="text" class="form-control" asp-for="Remarks" placeholder="Remarks" />
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>

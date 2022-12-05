@@ -1,0 +1,579 @@
+﻿
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Fastech | Health Declaration</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link href="~/css/healthdecstyle.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class='navbar ' style="display:none">
+        <a class="navbar-brand ">
+            <img src="~/img/fastech-logo.png" alt='Official logo' height='50' />
+        </a>
+    </nav>
+
+    <div class="content" style="visibility:hidden;opacity:0">
+        <!--content inner-->
+        <div class="content__inner">
+
+            <div class="container overflow-hidden">
+                <!--multisteps-form-->
+                <div class="multisteps-form">
+                    <!--progress bar-->
+                    <div class="row">
+                        <div class="col-lg-8 ml-auto mr-auto mb-4">
+                            <div class="multisteps-form__progress">
+                                <button class="multisteps-form__progress-btn js-active" type="button">1</button>
+                                <button class="multisteps-form__progress-btn" type="button">2</button>
+                                <button class="multisteps-form__progress-btn" type="button">3</button>
+                                <button class="multisteps-form__progress-btn" type="button">4</button>
+                                <button class="multisteps-form__progress-btn" type="button">5</button>
+                                <button class="multisteps-form__progress-btn" type="button">6</button>
+                                <button class="multisteps-form__progress-btn" type="button">7</button>
+                                <button class="multisteps-form__progress-btn" type="button">8</button>
+                                <button class="multisteps-form__progress-btn" type="button">9</button>
+                                <button class="multisteps-form__progress-btn" type="button">10</button>
+                                <button class="multisteps-form__progress-btn" type="button">11</button>
+                                <button class="multisteps-form__progress-btn" type="button">12</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-8 m-auto">
+
+                            <form class="multisteps-form__form">
+                                <!--single form panel-->
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="slideHorz">
+                                    <h3 class="multisteps-form__title">Employee Number</h3>
+                                    <div class="multisteps-form__content">
+                                        <div class="form-row mt-4">
+                                            <div class="col-12">
+                                                <input class="multisteps-form__input form-control" type="text">
+                                            </div>
+
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--single form panel-->
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <h3 class="multisteps-form__title">Name</h3>
+                                    <div class="multisteps-form__content">
+                                        <div class="form-row mt-4">
+                                            <div class="col-12">
+                                                <input class="multisteps-form__input form-control" type="text">
+                                            </div>
+
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <div class="overflow-sm">
+                                        <h3 class="multisteps-form__title">Shift</h3>
+                                        <div class="multisteps-form__content">
+                                            <div class="form-row mt-4">
+                                                <div class="col-sm-6 col-12">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                        <label class="form-check-label" for="exampleRadios1">
+                                                            Day Shift (6am-6pm)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios2">
+                                                            Night Shift (6pm-6am)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios3">
+                                                            Normal Time (7am to 4pm)
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios4">
+                                                            1st Shift (6am-2pm)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios5">
+                                                            2nd Shift (2pm-10pm)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios6">
+                                                            3rd Shift (10pm-6am)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios7" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios7">
+                                                            Work From Home
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button-row d-flex mt-4">
+                                        <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                        <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                    </div>
+                                </div>
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <div class="overflow-sm">
+                                        <h3 class="multisteps-form__title">Trip and bus/van number</h3>
+                                        <div class="multisteps-form__content">
+                                            <div class="form-row mt-4">
+                                                <div class=" col-12">
+
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios8" value="option1" checked>
+                                                        <label class="form-check-label" for="exampleRadios8">
+                                                            Alabang - Bicutan – VAN 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios9" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios9">
+                                                            Alabang (Baybay) – BUS 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios10" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios10">
+                                                            Balibago – BUS 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios11" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios11">
+                                                            Balibago - VAN 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios12" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios12">
+                                                            Crossing – Mayapa – BUS 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios13" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios13">
+                                                            Crossing – Mayapa – BUS 2
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios14" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios14">
+                                                            Crossing – Mayapa – VAN 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios15" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios15">
+                                                            Mamatid – San Isidro – BUS 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios16" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios16">
+                                                            Mamatid – San Isidro – BUS 2
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios17" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios17">
+                                                            Mamatid – San Isidro – BUS 3
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios18" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios18">
+                                                            Pulo – San Isidro – BUS 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios19" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios19">
+                                                            Pulo – San Isidro – BUS 2
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios20" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios20">
+                                                            Canlubang – VAN 1
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios21" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios21">
+                                                            Canlubang – VAN 2
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios2">
+                                                            Wigo
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios22" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios22">
+                                                            Camp in
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios23" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios23">
+                                                            Not applicable (using personal vehicle/walk in/carpool)
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios24" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios24">
+                                                            Other
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="button-row d-flex mt-4">
+                                        <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                        <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                    </div>
+                                </div>
+                                <!--single form panel-->
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <h3 class="multisteps-form__title">Bus/van seat number</h3>
+                                    <div class="multisteps-form__content">
+                                        <div class="form-row mt-4">
+                                            <div class="col-12">
+                                                <input class="multisteps-form__input form-control" type="text">
+                                            </div>
+
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--single form panel-->
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <h4 class="multisteps-form__title">
+                                        Previous day's outgoing trip and bus/van seat number
+                                    </h4>
+                                    <div class="multisteps-form__content">
+                                        <div class="form-row mt-4">
+                                            <div class="col-12">
+                                                <input class="multisteps-form__input form-control" type="text">
+                                            </div>
+
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <div class="overflow-sm">
+                                        <h4 class="multisteps-form__title">Area were you had your breakfast / lunch / dinner / coffee break</h4>
+                                        <div class="multisteps-form__content">
+
+                                            <div class="form-row mt-4">
+                                                <div class="col-sm-6 col-12">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios25" value="option1" checked>
+                                                        <label class="form-check-label" for="exampleRadios25">
+                                                            Canteen
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios26" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios26">
+                                                            Engineering Office
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios27" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios27">
+                                                            QA System/DCC office
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios28" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios28">
+                                                            PPC Office
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios29" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios29">
+                                                            IT Office
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-12">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios30" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios30">
+                                                            QA Sustaining Office
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios31" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios31">
+                                                            HR Office
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios32" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios32">
+                                                            Executive Office
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios33" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios33">
+                                                            Training Room
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios34" value="option2">
+                                                        <label class="form-check-label" for="exampleRadios34">
+                                                            Others
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button-row d-flex mt-4">
+                                        <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                        <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                    </div>
+                                </div>
+                                <!--single form panel-->
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <h4 class="multisteps-form__title">
+                                        Table number when you had your last breakfast / lunch / dinner / coffee break
+                                    </h4>
+                                    <div class="multisteps-form__content">
+                                        <div class="form-row mt-4">
+                                            <div class="col-12">
+                                                <input class="multisteps-form__input form-control" type="text">
+                                            </div>
+
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <div class="overflow-sm">
+                                        <h4 class="multisteps-form__title">
+                                            Are you experiencing any of the following?  <i>(Ikaw ba ay nakakaranas sa alin man sa mga sumusunod?)</i>
+                                        </h4>
+
+                                        <ol>
+                                            <li>Cough <i>(ubo)</i></li>
+                                            <li>Colds <i>(sipon)</i></li>
+                                            <li>Diarrhea <i>(pagtatae)</i></li>
+                                            <li>Sore throat <i>(masakit na lalamunan)</i></li>
+                                            <li>MYALGIA or body aches <i>(pananakit ng katawan)</i></li>
+                                            <li>Headache <i>(masakit ang ulo)</i></li>
+                                            <li>Fever <i>(lagnat)</i></li>
+                                            <li>Difficulty breathing <i>(mahirap na paghinga)</i></li>
+                                            <li>Loss of taste or smell <i>(pagkawala ng panlasa o pang-amoy)</i></li>
+                                            <li>Fatigue <i>(panghihina)</i></li>
+                                        </ol>
+                                    </div>
+                                    <div class="multisteps-form__content">
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios35" value="option2">
+                                            <label class="form-check-label" for="exampleRadios35">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios36" value="option2">
+                                            <label class="form-check-label" for="exampleRadios36">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <h5 class="multisteps-form__title">
+                                        Neither my family members, someone who lives with me nor I have been in close contact with COVID-19 patients or for person requiring RT PCRT Test in the last 24 hours.
+                                        <i>
+                                            (Wala sa aking pamilya, kasama sa bahay o ako man ang nagkaroon close contact sa pasyente na may COVID-19 o pinayuhang mag RT PCT sa loob ng 24 oras.)
+                                        </i>
+                                    </h5>
+                                    <div class="multisteps-form__content">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios37" value="option2">
+                                            <label class="form-check-label" for="exampleRadios37">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios38" value="option2">
+                                            <label class="form-check-label" for="exampleRadios38">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <h5 class="multisteps-form__title">
+                                        I did not go to any hospital/medical clinic in the last 3 days.
+                                        <i>
+                                            (Ako ay hindi nagpunta sa kahit anung nagpunta sa ospital o medical clinic sa nakalipas na tatlong (3) araw.)
+                                        </i>
+                                    </h5>
+                                    <div class="multisteps-form__content">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios39" value="option2">
+                                            <label class="form-check-label" for="exampleRadios39">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios40" value="option2">
+                                            <label class="form-check-label" for="exampleRadios40">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                            <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="slideHorz">
+                                    <div class="overflow-sm">
+                                        By agreeing to this document,
+                                        I hereby authorize Fastech to collect and process the data indicated herein for the purpose of effecting control of the COVID-19 infection.
+                                        I understand that my personal information is protected by RA 10173 (Data Privacy Act of 2012).
+                                        I know that I am required to provide truthful information as required under RA 11469 (Bayanihan Heal as One Act).
+                                        I certify that as of today, I am submitting this Health and Safety Declaration Checklist  voluntarily and with full knowledge and understanding of its safety purpose.
+                                        It is also my desire to preserve the good health and well-being of everyone in my workplace.Lastly,
+                                        I render the company free and harmless against any liability or responsibility on any claim of any nature whatsoever.
+                                        <i>
+                                            (Ang aking pag sang-ayon ay nangangahulugang pinahihintulutan ko ang Fastech na kolektahin at i-process ang mga impormasyon na aking isinaad upang
+                                            gamitin para sa layunin na ma-control ng pagkalat ng Covid-19.
+                                            Nauunawaan ko na ang aking mga personal na impormasyon ay protektado ng RA 10173 (Data Privacy Act of 2012).
+                                            Nauunawaan ko rin na ako ay kinakailangang mag bigay ng pawang katotohanang impormasyon lamang bilang pag sunod sa RA 11469 (Bayanihan Heal as One Act).
+                                            Bilang pag papatunay na sa araw na ito ay bolontaryo kong sinusumite ang Health and Safety Declaration Checklist at aking nauunawaan ang safety purpose nito.
+                                            Hangad ko rin na mapanatili ang maayos na kalusugan at kapakanan ng aking kapwa sa lugar na aking pinag tatrabahuhan.
+                                            Panghuli, ang kumpanya ay walang pananagutan o responsibilidad kung ang aking isinaad na mga impormasyon ay magamit sa ibang pamamaraan na higit sa
+                                            nasasakupan ng kumpanya.)
+                                        </i>
+                                    </div>
+                                    <br />
+                                    <div class="multisteps-form__content">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios41" value="option2">
+                                            <label class="form-check-label" for="exampleRadios41">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios42" value="option2">
+                                            <label class="form-check-label" for="exampleRadios42">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button>
+                                            <button class="btn btn-success ml-auto" type="button" title="Send">Send</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="startcard ">
+        <div class="row justify-content-center align-items-center" id="cardstart">
+            <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                <div class="card text-center shadow p-4 rounded bg-white">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <img src="~/img/fastech-logo.png" alt='Official logo' height='50' class="mx-auto text-center" />
+                        </h5>
+                        <p class="card-text">
+                            <h3>ONLINE DAILY HEALTH AND SAFETY DECLARATION CHECKLIST</h3>
+                            Hi there, please fill out and submit this form.
+                            <br />
+                            <small>12 questions</small>
+                        </p>
+                        <button type="button" class="btn btn-primary" id="start">Start</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/healthdecscript.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#start').click(function () {
+                $('.startcard').hide();
+                $('.navbar').fadeIn().addClass("d-none d-md-block");
+                $(".content").css({
+                    "visibility": "visible",
+                    "opacity": "1",
+                    "transition": "opacity 0.3s, visibility 0.3s"
+                });
+            });
+        });
+    </script>
+</body>
+</html>

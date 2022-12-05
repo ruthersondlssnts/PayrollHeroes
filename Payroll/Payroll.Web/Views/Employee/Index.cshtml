@@ -1,0 +1,42 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Employee";
+
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-block btn-default" id="process" onclick="return getbyID()">Create</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Employee</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="jsGrid1"></div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+
+<partial name="_form" />
+
+@section scripts {
+    
+    <script src="~/js/app/Employee/get.js"></script>
+    <script src="~/js/app/Employee/grid.js"></script>
+    <script src="~/js/app/Employee/update.js"></script>
+    <script src="~/js/app/Employee/validation.js"></script>
+    <script src="~/js/app/Employee/_initialize.js"></script>
+}

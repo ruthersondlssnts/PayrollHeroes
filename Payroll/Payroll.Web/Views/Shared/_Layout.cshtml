@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewData["Title"] - Payroll.Web</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css" />
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="~/css/ionicons.min.css">
+        <link rel="stylesheet" href="~/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <!-- daterange picker -->
+        <link rel="stylesheet" href="~/adminlte/plugins/datepicker/datepicker3.css">
+        <!-- JsGrid -->
+        <link rel="stylesheet" href="~/adminlte/plugins/jsgrid/jsgrid.min.css">
+        <link rel="stylesheet" href="~/adminlte/plugins/jsgrid/jsgrid-theme.min.css">
+        <!-- Select2 -->
+        <link rel="stylesheet" href="~/adminlte/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="~/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        <!--SWEETALERT-->
+        <link rel="stylesheet" href="~/adminlte/plugins/sweetalert2/sweetalert2.css">
+
+        <!-- fullCalendar -->
+        <!-- qTip -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
+
+        <!-- Full Calendar -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css" />
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.print.css" media="print" />
+
+
+        <link rel="stylesheet" href="~/adminlte/dist/css/AdminLTE.min.css" />
+
+        <!-- Google Font: Source Sans Pro -->
+        <link href="~/css/google.css" rel="stylesheet">
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css" />
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="~/css/ionicons.min.css">
+        <link rel="stylesheet" href="~/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <!-- daterange picker -->
+        <link rel="stylesheet" href="~/adminlte/plugins/datepicker/datepicker3.css">
+        <!-- JsGrid -->
+        <link rel="stylesheet" href="~/adminlte/plugins/jsgrid/jsgrid.min.css">
+        <link rel="stylesheet" href="~/adminlte/plugins/jsgrid/jsgrid-theme.min.css">
+        <!-- Select2 -->
+        <link rel="stylesheet" href="~/adminlte/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="~/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+        <!--SWEETALERT-->
+        <link rel="stylesheet" href="~/adminlte/plugins/sweetalert2/sweetalert2.css">
+        <!-- fullCalendar -->
+        <!-- qTip -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
+
+        <!-- Full Calendar -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css" />
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.print.css" media="print" />
+
+
+        <link rel="stylesheet" href="~/adminlte/dist/css/AdminLTE.min.css" />
+
+        <!-- Google Font: Source Sans Pro -->
+        <link href="~/css/google.css" rel="stylesheet">
+    </environment>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed text-sm"  onload="StartTimers();" onmousemove="ResetTimers();">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <partial name="_TopMenu" />
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <partial name="_LeftMenu" />
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                @*<div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">Starter Page</h1>
+                            </div><!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Starter Page</li>
+                                </ol>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->*@
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <div class="content">
+                @RenderBody()
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        </footer>
+
+        <div class="modal fade bd-example-modal-sm" id="divPopupTimeOut" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Session Expire! </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Your session will end in <span id="CountDownHolder" style="color:red;"></span>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="ResetTimerButton();">Continue</button>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Logout", "Account")'">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="~/adminlte/plugins/jquery/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <!-- fullCalendar 2.2.5 -->
+    <script src="~/adminlte/plugins/fullcalendar/main.min.js"></script>
+    <script src="~/adminlte/plugins/moment/moment.min.js"></script>
+
+    <!-- Include moment-->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- qTip -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
+
+    <!-- Full Calendar -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js"></script>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- overlayScrollbars -->
+    <!-- jsGrid -->
+    <script src="~/adminlte/plugins/jsgrid/demos/db.js"></script>
+    <script src="~/adminlte/plugins/jsgrid/jsgrid.min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="~/adminlte/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- Select2 -->
+    <script src="~/adminlte/plugins/select2/js/select2.full.min.js"></script>
+    <!-- sweetalert2 -->
+    <script src="~/adminlte/plugins/sweetalert2/sweetalert2.js"></script>
+    <script src="~/js/jquery.mask.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="~/adminlte/dist/js/adminlte.js"></script>
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="~/adminlte/dist/js/demo.js"></script>
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+    <script src="~/adminlte/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="~/adminlte/plugins/raphael/raphael.min.js"></script>
+    <script src="~/adminlte/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+    <script src="~/adminlte/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+
+
+
+    <!-- ChartJS -->
+    <script src="~/adminlte/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/js/swal.js"></script>
+
+    @*@RenderSection("JavascriptImport", false)*@
+
+
+    <script type="text/javascript">
+        var loginUrl='@Url.Action("Login", "Account")';
+        var extendMethodUrl = '@Url.Action("ExtendSession","Account")';
+
+        // Set timeout variables.
+        var timoutWarning = 750000; // Display warning in 1Mins.
+        var timoutNow = 800000; // Timeout in 2 mins.
+        var logoutUrl = '@Url.Action("Login", "Account")';
+
+        var warningTimer;
+        var timeoutTimer;
+
+        // Start timers.
+        function StartTimers() {
+            warningTimer = setTimeout("IdleWarning()", timoutWarning);
+            timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+        }
+
+        // Reset timers.
+        function ResetTimers() {
+            clearTimeout(warningTimer);
+            clearTimeout(timeoutTimer);
+            StartTimers();
+        }
+
+        function ResetTimerButton() {
+            ResetTimers();
+            $.ajax({
+                    type: "GET",
+                    url: extendMethodUrl,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function successFunc(response) {
+                        $('#divPopupTimeOut').modal('hide');
+                        swal_reset();
+                    },
+                    error:function(){
+                    }
+            });
+        }
+
+        // Show idle timeout warning dialog.
+        function IdleWarning() {
+            $('#divPopupTimeOut').modal({
+                    backdrop: 'static',
+                    keyboard: true,
+                    show: true
+            });
+            _timeLeft = 120; //In seconds
+            updateCountDown();
+        }
+
+        // Logout the user.
+        function IdleTimeout() {
+            window.location = logoutUrl;
+        }
+
+        var updateCountDown = function() {
+                var min = Math.floor(_timeLeft / 60);
+                var sec = _timeLeft % 60;
+                if(sec < 10)
+                    sec = "0" + sec;
+
+                document.getElementById("CountDownHolder").innerHTML = min + ":" + sec;
+
+                if(_timeLeft > 0) {
+                    _timeLeft--;
+                    _countDownTimer = window.setTimeout(updateCountDown, 1000);
+                } else  {
+                    document.location = loginUrl;
+                }
+        };
+
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

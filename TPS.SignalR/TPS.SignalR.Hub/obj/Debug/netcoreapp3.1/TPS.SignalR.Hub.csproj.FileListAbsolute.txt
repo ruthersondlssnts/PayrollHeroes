@@ -1,0 +1,13 @@
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\bin\Debug\netcoreapp3.1\TPS.SignalR.Hub.exe
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\bin\Debug\netcoreapp3.1\TPS.SignalR.Hub.deps.json
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\bin\Debug\netcoreapp3.1\TPS.SignalR.Hub.runtimeconfig.json
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\bin\Debug\netcoreapp3.1\TPS.SignalR.Hub.runtimeconfig.dev.json
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\bin\Debug\netcoreapp3.1\TPS.SignalR.Hub.dll
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\bin\Debug\netcoreapp3.1\TPS.SignalR.Hub.pdb
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\obj\Debug\netcoreapp3.1\TPS.SignalR.Hub.csprojAssemblyReference.cache
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\obj\Debug\netcoreapp3.1\TPS.SignalR.Hub.AssemblyInfoInputs.cache
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\obj\Debug\netcoreapp3.1\TPS.SignalR.Hub.AssemblyInfo.cs
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\obj\Debug\netcoreapp3.1\TPS.SignalR.Hub.csproj.CoreCompileInputs.cache
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\obj\Debug\netcoreapp3.1\TPS.SignalR.Hub.dll
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\obj\Debug\netcoreapp3.1\TPS.SignalR.Hub.pdb
+C:\Users\biboy\Source\repos\TPS.SignalR\TPS.SignalR.Hub\obj\Debug\netcoreapp3.1\TPS.SignalR.Hub.genruntimeconfig.cache

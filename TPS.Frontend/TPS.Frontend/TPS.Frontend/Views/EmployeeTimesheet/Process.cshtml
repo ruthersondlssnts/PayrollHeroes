@@ -1,0 +1,270 @@
+﻿@{
+    ViewData["Title"] = "Process Timesheet";
+}
+<link href="~/plugins/dropzone/dropzone.css" rel="stylesheet" />
+<style>
+    .dz-progress {
+        opacity: 0 !important;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Employee Proccessing</h4>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <!-- select -->
+                            <div class="form-group">
+                                <label>Cutoff</label>
+                                <select class="custom-select" id="cutoff"></select>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button type="button" class="btn btn-block btn-success" id="generate"><i class="fas fa-cogs"></i> Generate</button>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button type="button" class="btn btn-block btn-primary" id="process"><i class="fas fa-users-cog"></i> Process</button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Timesheet Uploading</h4>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="dropzone" class="form-group">
+                                <form action="/EmployeeTimesheet/Upload" class="dropzone needsclick dz-clickable" style="min-height:150px;max-height:150px" id="uploader">
+                                    @Html.AntiForgeryToken()
+                                    <div class="dz-message needsclick">
+                                        Drop files here or click to upload.<br>
+
+                                    </div>
+                                    <div id="previews">
+                                        <div id="template">
+                                            <div class="card" style="margin:0">
+                                                <div class="card-body">
+                                                    <div class="mb-1">
+                                                        <div class="card-tools">
+                                                            <button type="button" class="btn btn-tool cancel" data-card-widget="remove" style="float:right">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                        <span class="" data-dz-name></span>
+                                                        (<strong data-dz-size></strong>)
+                                                    </div>
+                                                    <div class="progress progress-xs active">
+                                                        <div class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%" data-dz-uploadprogress>
+                                                        </div>
+                                                    </div>
+                                                    <span class="error text-danger" data-dz-errormessage></span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group ">
+                                <button type="submit" class="btn btn-primary col start">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Start upload</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+
+@section scripts {
+
+    <script src="~/plugins/dropzone/dropzone.js"></script>
+    <script>
+        Dropzone.autoDiscover = false;
+        var previewNode = document.querySelector("#template")
+        previewNode.id = ""
+        var previewTemplate = previewNode.parentNode.innerHTML
+        previewNode.parentNode.removeChild(previewNode)
+
+        var myDropzone = new Dropzone("#uploader", {
+            autoProcessQueue: false,
+            paramName: "file",
+            maxFiles: 1,
+            maxfilesexceeded: function (file) {
+                this.removeAllFiles();
+                this.addFile(file);
+            },
+            acceptedFiles: ".xlsx,.xlsm,.xls,.xltx,.xltm",
+            previewsContainer: "#previews",
+            previewTemplate: previewTemplate,
+            success: function () {
+                Swal.fire(
+                    'Process!',
+                    'Timesheet Uploaded',
+                    'success'
+                )
+            }
+        });
+        document.querySelector(".start").onclick = function () {
+            myDropzone.processQueue();
+        }
+        $(document).on("click", ".cancel", function () {
+            myDropzone.removeAllFiles(true)
+            document.querySelector(".dz-message").style.display = 'block';
+        });
+        myDropzone.on("addedfile", function (file) {
+            document.querySelector(".dz-message").style.display = 'none';
+        })
+
+        $(document).ready(function () {
+            GetCutoff();
+            $("#generate").click(function () {
+
+                Swal.fire({
+                    title: 'Generate timesheet for all employee for this cuttoff?',
+                    //text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    allowOutsideClick: false,
+                }).then((result) => {
+                    if (result.value) {
+                        var urli = '@Url.Action("GenerateTimesheet", "EmployeeTimesheet")';
+                        var cutoffId = $('#cutoff').val();
+                        Swal.fire({
+                            title: 'Please Wait..!',
+                            text: 'Is working..',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                            onOpen: () => {
+                                swal.showLoading()
+                            }
+                        })
+                        $.ajax({
+                            url: urli + '?cutoffId=' + cutoffId,
+                            type: "GET",
+                            error: function (response) {
+                                Swal.hideLoading();
+                                Swal.fire(
+                                    'Generate Failed!',
+                                    'Timesheet generation failed',
+                                    'error'
+                                )
+                            },
+                            success: function (response) {
+                                Swal.hideLoading();
+                                Swal.fire(
+                                    'Process!',
+                                    'Timesheet generation completed',
+                                    'success'
+                                )
+                                Grid();
+                            }
+                        });
+
+                    }
+                })
+
+            });
+            $("#process").click(function () {
+                Swal.fire({
+                    title: 'Process all employee for this cuttoff?',
+                    //text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    allowOutsideClick: false,
+                }).then((result) => {
+                    if (result.value) {
+                        var urli = '@Url.Action("ProcessTimesheet", "EmployeeTimesheet")';
+                        var cutoffId = $('#cutoff').val();
+                        Swal.fire({
+                            title: 'Please Wait..!',
+                            text: 'Is working..',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                            onOpen: () => {
+                                swal.showLoading()
+                            }
+                        })
+                        $.ajax({
+                            url: urli + '?cutoffId=' + cutoffId,
+                            type: "GET",
+                            error: function (response) {
+                                Swal.hideLoading();
+                                Swal.fire(
+                                    'Process Failed!',
+                                    'Cuttoff processing failed',
+                                    'error'
+                                )
+                            },
+                            success: function (response) {
+                                Swal.hideLoading();
+                                Swal.fire(
+                                    'Process!',
+                                    'Cuttoff has been processed',
+                                    'success'
+                                )
+                                Grid();
+                            }
+                        });
+
+                    }
+                })
+
+            });
+        });
+
+
+        function GetCutoff() {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetCutoff", "EmployeeTimesheet")',
+                data: "{}",
+                success: function (data) {
+                    var s = '';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+                    $("#cutoff").html(s);
+                }
+
+            });
+        }
+    </script>
+}

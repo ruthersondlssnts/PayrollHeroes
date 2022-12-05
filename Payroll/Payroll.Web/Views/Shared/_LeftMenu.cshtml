@@ -1,0 +1,156 @@
+﻿@*
+    This partial controls the left menu of the AdminLTE dashboard and is called automatically by _AdminLteLayout
+       This is where you can add, modify, or remove navigation options in your app
+       TODO: This preserves the links as-is for the demo, which lead to broken pages!
+       It's up to you to make sure these links either get deleted or lead somewhere REAL!
+*@
+@{
+    Layout = null;
+}
+@using System.Security.Claims
+@using Payroll.Core.Entities;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContextAccessor
+@using Payroll.Web.Controllers;
+@{
+    string controller = ViewContext.RouteData.Values["Controller"].ToString();
+    string action = ViewContext.RouteData.Values["Action"].ToString();
+
+    //Get Session data
+    List<RoleMenuEntity> role_menu = httpContextAccessor.HttpContext.Session.GetComplexData<List<RoleMenuEntity>>("role_menu");
+
+    string access = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+
+    //Settings>Groupings
+    bool approver_all = access.Contains(Enums.approver.approver_all.GetDescription());
+    bool ot_approver = access.Contains(Enums.approver.ot_approver.GetDescription());
+    bool ob_approver = access.Contains(Enums.approver.ob_approver.GetDescription());
+    bool leave_approver = access.Contains(Enums.approver.leave_approver.GetDescription());
+    bool dtr_approver = access.Contains(Enums.approver.dtr_approver.GetDescription());
+
+
+}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+        <img src="~/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">@User.Identity.Name</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+
+
+                @foreach (var root in role_menu.Where(a => a.role_menu_parent_id == 0))
+                {
+                    string menu_open = "";
+                    string menu_active = "";
+                    var childs = role_menu.Where(a => a.role_menu_parent_id == root.role_menu_id);
+                    if (childs == null) { continue; }
+                    var selected = childs.Where(a => a.controller_name == controller && a.action_name == action).FirstOrDefault();
+                    if (selected != null) { menu_open = "menu-open"; menu_active = "active"; }
+
+                    <li class="nav-item has-treeview @menu_open">
+                        <a href="#" class="nav-link @menu_active">
+                            <i class="@root.display_icon"></i>
+                            <p>
+                                @root.display_name
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+                            @foreach (var child in role_menu.Where(a => a.role_menu_parent_id == root.role_menu_id))
+                            {
+
+                                string active = "";
+                                if (controller == child.controller_name && action == child.action_name)
+                                {
+                                    active = "active";
+                                }
+
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller=@child.controller_name asp-action=@child.action_name class="nav-link  @active">
+                                        <i class="@child.display_icon"></i>
+                                        <p>@child.display_name</p>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+
+
+                <!-- Request APPROVAL has not been disabled in role_menu because it has separate maintenance page
+                    which is in Settings>Groupings-->
+                @if (approver_all || ot_approver || ob_approver || leave_approver || dtr_approver)
+                {
+                    <!-- Request APPROVAL -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>
+                                For Approval
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @if (approver_all || leave_approver)
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Calendar" asp-action="Index" class="nav-link">
+                                        <i class="far fa-clock nav-icon"></i>
+                                        <p>Leave Calendar</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="RequestLeave" asp-action="Approval" class="nav-link">
+                                        <i class="far fa-clock nav-icon"></i>
+                                        <p>Leave</p>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (approver_all || ot_approver)
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="RequestOvertime" asp-action="Approval" class="nav-link">
+                                        <i class="far fa-clock nav-icon"></i>
+                                        <p>Overtime</p>
+                                    </a>
+                                </li>
+                            }
+
+                            @if (approver_all || dtr_approver)
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="RequestDTR" asp-action="Approval" class="nav-link">
+                                        <i class="far fa-clock nav-icon"></i>
+                                        <p>DTR Correction</p>
+                                    </a>
+                                </li>
+                            }
+
+                        </ul>
+                    </li>
+                    <!-- Request APPROVAL -->
+                }
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+</aside>

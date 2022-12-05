@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Trip Page";
+}
+
+
+<div class="row">
+
+    <div class="col-12">
+        <!-- /.card -->
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Trip List</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="form-group col-md-2">
+                    <a type="button" class="btn btn-block btn-primary" asp-controller="Account" asp-action="Register">Create</a>
+                </div>
+                <div class="table-responsive-md">
+                    <table id="table" class="table table-bordered table-striped dt-responsive nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Trip Name</th>
+                                <th data-priority="1">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < 10; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        Rutherson@(i)
+                                    </td>
+                                    <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+        $(function () {
+            $("#table").DataTable({
+                responsive: true
+            });
+        });
+    </script>
+
+}

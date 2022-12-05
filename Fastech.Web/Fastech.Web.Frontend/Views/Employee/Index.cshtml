@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Employee Page";
+}
+
+
+<div class="row">
+
+    <div class="col-12">
+        <!-- /.card -->
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Employee List</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="form-group col-md-2">
+                    <a type="button" class="btn btn-block btn-primary" asp-controller="Employee" asp-action="Create">Create</a>
+                </div>
+                <div class="table-responsive-md">
+                    <table id="table" class="table table-bordered table-striped dt-responsive nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Employee No.</th>
+                                <th>Name</th>
+                                <th>Date Hired</th>
+                                <th>Department</th>
+                                <th>Position</th>
+                                <th>Supervisor</th>
+                                <th>Manager</th>
+                                <th>Birthdate</th>
+                                <th>Gender</th>
+                                <th>Civil Status</th>
+                                <th>Present Address</th>
+                                <th>Permanent Address</th>
+                                <th>Cluster</th>
+                                <th data-priority="1">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < 50; i++)
+                            {
+                                <tr>
+                                    <td>@(i+200)</td>
+                                    <td>Rutherson C. Delos Santos</td>
+                                    <td>01/20/2020</td>
+                                    <td>IT</td>
+                                    <td>Employee</td>
+                                    <td>Lebron James</td>
+                                    <td>Michael Jordan</td>
+                                    <td>01/20/2000</td>
+                                    <td>Male</td>
+                                    <td>Single</td>
+                                    <td>Mandaluyong City</td>
+                                    <td>Mandaluyong City</td>
+                                    <td>Cluster</td>
+                                    <td> <a href="#">Edit</a> | <a href="#">Delete</a></td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+        $(function () {
+            $("#table").DataTable({
+                responsive: true
+            });
+        });
+    </script>
+
+}

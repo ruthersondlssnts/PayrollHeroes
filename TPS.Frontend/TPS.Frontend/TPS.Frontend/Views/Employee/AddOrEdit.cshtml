@@ -1,0 +1,261 @@
+﻿@model TPS.Frontend.Infrastructure.Employee
+@{
+    Layout = null;
+}
+
+<div class="alert alert-danger" role="alert" id="error-summary">
+    <ul id="errorlist"></ul>
+</div>
+<div class="bs-stepper" id="stepper">
+    <div class="bs-stepper-header" role="tablist">
+        <!-- your steps here -->
+        <div class="step" data-target="#peronal-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="personal-part" id="peronal-part-trigger">
+                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label">Personal</span>
+            </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#accnt-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="accnt-part" id="accnt-part-trigger">
+                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label">Account</span>
+            </button>
+        </div>
+
+        <div class="line"></div>
+        <div class="step" data-target="#job-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="job-part" id="job-part-trigger">
+                <span class="bs-stepper-circle">3</span>
+                <span class="bs-stepper-label">Job</span>
+            </button>
+        </div>
+    </div>
+    <div class="bs-stepper-content">
+        <form asp-action="AddOrEdit" onsubmit="return jQueryAjaxPost(this);" autocomplete="off" enctype="multipart/form-data">
+            <!-- your steps content here -->
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <input type="hidden" asp-for="CreateDate" />
+            @*<input type="hidden" asp-for="Username" />
+                <input type="hidden" asp-for="Password" />*@
+            <input type="hidden" asp-for="PhotoPath" />
+            <div id="peronal-part" class="content" role="tabpanel" aria-labelledby="peronal-part-trigger">
+
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        @{
+                            var photoPath = "/employeephotos/" + (Model.PhotoPath ?? "no-img.png");
+                        }
+                        <img id="employeeimg" src="@photoPath" class="rounded-circle" style="width:100px;height:100px" alt="your image" />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Photo">Photo</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="form-control custom-file-input" asp-for="Photo" onchange="PhotoChange(this);" />
+                                    <label class="custom-file-label">Choose File...</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="removeimg" style="cursor:default">Remove</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Name">First Name</label>
+                            <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Name">Last Name</label>
+                            <input type="text" class="form-control" asp-for="LastName" placeholder="Last Name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Name">Email</label>
+                    <input type="text" class="form-control" asp-for="EmailAddress" placeholder="Email" />
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Name">Contact Number</label>
+                    <input type="text" class="form-control" asp-for="ContactNumber" placeholder="Contact Number" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="GenderName">Gender</label><br />
+                    <div class="radio icheck-primary icheck-inline">
+                        <input type="radio" id="r1" asp-for="GenderName" value="Male" />
+                        <label style="font-weight:400" for="r1">Male</label>
+                    </div>
+                    <div class="radio icheck-primary icheck-inline">
+                        <input type="radio" id="r2" asp-for="GenderName" value="Female" />
+                        <label style="font-weight:400" for="r2">Female</label>
+                    </div>
+                    <span asp-validation-for="GenderName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="MaritalStatusName">Marital Status</label><br />
+                    <div class="radio icheck-primary icheck-inline">
+                        <input type="radio" id="r3" asp-for="MaritalStatusName" value="Single" />
+                        <label style="font-weight:400" for="r3">Single</label>
+                    </div>
+                    <div class="radio icheck-primary icheck-inline">
+                        <input type="radio" id="r4" asp-for="MaritalStatusName" value="Married" />
+                        <label style="font-weight:400" for="r4">Married</label>
+                    </div>
+                    <div class="radio icheck-primary icheck-inline">
+                        <input type="radio" id="r5" asp-for="MaritalStatusName" value="Widowed" />
+                        <label style="font-weight:400" for="r5">Widowed</label>
+                    </div>
+                    <div class="radio icheck-primary icheck-inline">
+                        <input type="radio" id="r6" asp-for="MaritalStatusName" value="Divorced" />
+                        <label style="font-weight:400" for="r6">Divorced</label>
+                    </div>
+                    <div class="radio icheck-primary icheck-inline">
+                        <input type="radio" id="r7" asp-for="MaritalStatusName" value="Separated" />
+                        <label style="font-weight:400" for="r7">Separated</label>
+                    </div>
+                    <span asp-validation-for="MaritalStatusName" class="text-danger"></span>
+                </div>
+                <a class="btn btn-primary" onclick="stepper.next()">Next</a>
+            </div>
+            <div id="accnt-part" class="content" role="tabpanel" aria-labelledby="accnt-part-trigger">
+                <div class="form-group">
+                    <label for="Name">Employee Serial</label>
+                    <input type="text" class="form-control" asp-for="EmployeeSerial" placeholder="Employee Serial" />
+                    <span asp-validation-for="EmployeeSerial" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Name">Username</label>
+                    <input type="text" class="form-control" asp-for="Username" placeholder="Username" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Name">Password</label>
+                    <input type="text" class="form-control" asp-for="Password" placeholder="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Name">SSS</label>
+                    <input type="text" class="form-control" asp-for="Sss" placeholder="SSS" />
+                    <span asp-validation-for="Sss" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Name">Pagibig</label>
+                    <input type="text" class="form-control" asp-for="Pagibig" placeholder="Pagibig" />
+                    <span asp-validation-for="Pagibig" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Name">Philhealth</label>
+                    <input type="text" class="form-control" asp-for="Philhealth" placeholder="Philhealth" />
+                    <span asp-validation-for="Philhealth" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="TaxNumber">Tax No</label>
+                    <input type="text" class="form-control" asp-for="TaxNumber" placeholder="Tax No." />
+                    <span asp-validation-for="TaxNumber" class="text-danger"></span>
+                </div>
+                <a class="btn btn-primary" onclick="stepper.previous()">Previous</a>
+                <a class="btn btn-primary" onclick="stepper.next()">Next</a>
+
+            </div>
+            <div id="job-part" class="content" role="tabpanel" aria-labelledby="job-part-trigger">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" data-target="#date-hire" data-toggle="datetimepicker">
+                            <label>Hire Date</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input type="text" asp-for="DateHire" class="form-control datetimepicker-input" id="date-hire" placeholder="Date Hire">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+
+                            <span asp-validation-for="DateHire" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" data-target="#date-resign" data-toggle="datetimepicker">
+                            <label>Resign Date</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input type="text" asp-for="DateResign" id="date-resign" class="form-control datetimepicker-input" placeholder="Date Resign">
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="DateResign" class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Electronic Id</label>
+                    <input type="number" class="form-control" asp-for="ElectronicId" placeholder="Electronic Id" />
+
+                    <span asp-validation-for="ElectronicId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Shift</label>
+                    <input type="hidden" disabled="disabled" asp-for="RefShift.ShiftName" id="hidden_shift" />
+                    <select class="custom-select" asp-for="RefShift.ShiftName">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="hidden" asp-for="GroupName" />
+                    <input type="hidden" asp-for="GroupId" id="hidden_groupId" disabled="disabled" />
+                    <select class="custom-select" asp-for="GroupId">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Name">Basic Pay</label>
+                    <input type="text" class="form-control" asp-for="BasicPay" placeholder="Basic Pay" />
+                    <span asp-validation-for="BasicPay" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="Roles" />
+
+                    <label>Roles</label>
+                    <br />
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="role_employee" value="Employee">
+                        <label class="form-check-label" for="role_employee">Employee</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="role_hr" value="HR">
+                        <label class="form-check-label" for="role_hr">HR</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="role_manager" value="Manager">
+                        <label class="form-check-label" for="role_manager">Manager</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="role_approver" value="Approver">
+                        <label class="form-check-label" for="role_approver">Approver</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="role_admin" value="Admin">
+                        <label class="form-check-label" for="role_admin">Admin</label>
+                    </div>
+                </div>
+
+                <a class="btn btn-primary" onclick="stepper.previous()">Previous</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+    </div>
+</div>

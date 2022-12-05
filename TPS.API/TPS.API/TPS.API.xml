@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FSP_Sanitation_Api</name>
+    </assembly>
+    <members>
+        <member name="M:FCTAPI.Controllers.InvitationController.GetInvitations">
+            <summary>
+            This is a method to get all invitations
+            </summary>
+            <returns>List of invitations</returns>
+        </member>
+        <member name="M:FCTAPI.Controllers.InvitationController.UpdateRoles(FCTAPI.Infrastructure.Models.Invitations)">
+            <summary>
+            This is a method to Update invitations
+            </summary>
+            <param name="invitations"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.InvitationController.CreateInvitations(System.Collections.Generic.List{FCTAPI.Infrastructure.DTO.GetInvitation})">
+            <summary>
+            This is a method to Create invitations
+            </summary>
+            <param name="invitations"></param> 
+            <response code="200">Returns success</response>
+            <response code="400">Duplicate email found or bad format</response>  
+        </member>
+        <member name="M:FCTAPI.Controllers.InvitationController.GetInvitationsByEMail(FCTAPI.Infrastructure.DTO.GetByEmail)">
+            <summary>
+            This is a method to Create invitations
+            </summary>
+            <param name="data"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.InvitationController.DeleteInvitation(System.Int32)">
+            <summary>
+            This is a method to Delete an invitations
+            </summary>
+            <param name="id"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.ParticipantsController.GetParticipants">
+            <summary>
+            This is a method to get all roles
+            </summary>
+            <returns>List of participants</returns>
+        </member>
+        <member name="M:FCTAPI.Controllers.ParticipantsController.UpdateParticipants(FCTAPI.Infrastructure.Models.Participants)">
+            <summary>
+            This is a method to Update participants
+            </summary>
+            <param name="participants"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.ParticipantsController.CreateRoles(FCTAPI.Infrastructure.Models.Participants)">
+            <summary>
+            This is a method to Create participants
+            </summary>
+            <param name="participants"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.PositionController.GetPositions">
+            <summary>
+            This is a method to get all positions
+            </summary>
+            <returns>List of positions</returns>
+        </member>
+        <member name="M:FCTAPI.Controllers.PositionController.UpdatePosition(FCTAPI.Infrastructure.Models.Positions)">
+            <summary>
+            This is a method to Update positions
+            </summary>
+            <param name="positions"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.PositionController.CreatePosition(FCTAPI.Infrastructure.Models.Positions)">
+            <summary>
+            This is a method to Create positions
+            </summary>
+            <param name="positions"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.RoleController.GetRoles">
+            <summary>
+            This is a method to get all roles
+            </summary>
+            <returns>List of roles</returns>
+        </member>
+        <member name="M:FCTAPI.Controllers.RoleController.UpdateRoles(FCTAPI.Infrastructure.Models.Roles)">
+            <summary>
+            This is a method to Update roles
+            </summary>
+            <param name="roles"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.RoleController.CreateRoles(FCTAPI.Infrastructure.Models.Roles)">
+            <summary>
+            This is a method to Create roles
+            </summary>
+            <param name="roles"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.UsersController.GetUser">
+            <summary>
+            This is a method to get all users
+            </summary>
+            <returns>List of Users</returns>
+        </member>
+        <member name="M:FCTAPI.Controllers.UsersController.UpdateUser(FCTAPI.Infrastructure.Models.Users)">
+            <summary>
+            This is a method to Update users
+            </summary>
+            <param name="users"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.UsersController.CreateUser(FCTAPI.Infrastructure.Models.Users)">
+            <summary>
+            This is a method to Create users
+            </summary>
+            <param name="users"></param> 
+        </member>
+        <member name="M:FCTAPI.Controllers.UsersController.SignUpUser(FCTAPI.Infrastructure.DTO.SignUp)">
+            <summary>
+            This is a method responsible for user Signup
+            </summary>
+            <param name="users"></param> 
+            <response code="200">Returns success</response>
+            <response code="400">Invalid email format / Email or Code not matched. / Email already registered.</response>  
+        </member>
+    </members>
+</doc>

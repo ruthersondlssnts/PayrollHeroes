@@ -1,0 +1,53 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Role Menu Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="main">
+                    <input type="hidden" id="role_menu_id" />
+
+                    <div class="form-group">
+                        <label>Parent</label>
+                        <select class="custom-select" id="role_menu_parent_id"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select class="custom-select" id="role_id"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Display Name</label>
+                        <input type="text" class="form-control" id="display_name" placeholder="Display name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Controller</label>
+                        <input type="text" class="form-control" id="controller_name" placeholder="Controller" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Action</label>
+                        <input type="text" class="form-control" id="action_name" placeholder="Action" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Icon</label>
+                        <input type="text" class="form-control" id="display_icon" placeholder="Icon" />
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+
+                            <input type="checkbox" class="form-check-input" id="is_enable" />
+                            <label class="form-check-label" for="Name">Enabled</label>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSave" style="display:none;" onclick="Update();">Save</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                <button type="button" class="btn btn-danger" id="btnDelete" style="display:none;" onclick="Delete();">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

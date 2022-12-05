@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "Employee Timesheet";
+}
+<div class="col-12">
+    <div class="row">
+        <div class="col-sm-3">
+            <!-- select -->
+            <div class="form-group">
+                <label>Cutoff</label>
+                <select class="custom-select" id="cutoff"></select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <button type="button" class="btn btn-block btn-primary" id="process"><i class="fas fa-user-cog"></i> Process</button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Employee DTR Summary</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div id="jsGrid2" class="jsgrid" style="position: relative; height: auto; width: 100%;"><div class="jsgrid-grid-header jsgrid-header-scrollbar"><table class="jsgrid-table"><tr class="jsgrid-header-row"><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">RqHr</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">RdHr</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">Late</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">UT</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">OT</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">ND</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">AB</th></tr><tr class="jsgrid-filter-row" style="display: none;"><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td></tr><tr class="jsgrid-insert-row" style="display: none;"><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td></tr></table></div><div class="jsgrid-grid-body"><table class="jsgrid-table"><tbody><tr class="jsgrid-nodata-row"><td class="jsgrid-cell" colspan="7">Not found</td></tr></tbody></table></div><div class="jsgrid-pager-container" style="display: none;"><div class="jsgrid-pager">Pages: <span class="jsgrid-pager-nav-button jsgrid-pager-nav-inactive-button"><a href="javascript:void(0);">First</a></span> <span class="jsgrid-pager-nav-button jsgrid-pager-nav-inactive-button"><a href="javascript:void(0);">Prev</a></span>  <span class="jsgrid-pager-nav-button jsgrid-pager-nav-inactive-button"><a href="javascript:void(0);">Next</a></span> <span class="jsgrid-pager-nav-button jsgrid-pager-nav-inactive-button"><a href="javascript:void(0);">Last</a></span> &nbsp;&nbsp; 1 of 0 </div></div><div class="jsgrid-load-shader" style="display: none; position: absolute; inset: 0px; z-index: 1000;"></div><div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div></div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Employee DTR</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="empdtrtable" class="table table-sm table-bordered table-striped dt-responsive nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="dtr-control" style="width:10px"></th>
+                            <th data-priority="1">Date</th>
+                            <th>Day</th>
+                            <th>Type</th>
+                            <th>RqHr</th>
+                            <th>In</th>
+                            <th>Out</th>
+                            <th>RdHr</th>
+                            <th>UT</th>
+                            <th>OT</th>
+                            <th>ND</th>
+                            <th>AB</th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+
+        $(document).ready(function () {
+            GetCutoff();
+
+            $('#cutoff').change(function () {
+                EmployeeDtrTable();
+            });
+        });
+
+
+        function GetCutoff() {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetCutoff", "EmployeeTimesheet")',
+                data: "{}",
+                success: function (data) {
+                    var s = '';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+                    $("#cutoff").html(s);
+                    EmployeeDtrTable();
+                }
+
+            });
+        }
+
+        function EmployeeDtrTable() {
+            $('#empdtrtable').DataTable().clear().destroy();
+            $("#empdtrtable").DataTable({
+                ajax: {
+                    url: '@Url.Action("GetData", "EmployeeTimesheet")' + '?cutoffId=' + $('#cutoff').val(),
+                    type: "GET",
+                    datatype: "json",
+                },
+                columnDefs: [
+                    {   targets: '_all', defaultContent: '-' },
+                    {   targets: 0, className: 'dtr-control', orderable: false }
+                ],
+                columns: [
+                    {   defaultContent: "" },
+                    {
+                        data: "shiftDate", autoWidth: true, render: function (data) { return moment(data).format("ll"); }
+                    },
+                    {
+                        data: "shiftDate", autoWidth: true, render: function (data) { return moment(data).format("ddd"); }
+                    },
+                    {   data: "dayTypeName", autoWidth: true },
+                    {   data: "requiredHour", autoWidth: true, render: function (data) { return data.toFixed(2) } },
+                    {   data: "actualIn", autoWidth: true, render: function (data) { return data ? moment(data).format("LT"): "-" } },
+                    {   data: "actualOut", autoWidth: true, render: function (data) { return data ? moment(data).format("LT"):"-" } },
+                    {   data: "renderedHour", autoWidth: true, render: function (data) { return data.toFixed(2) } },
+                    {
+                        data: "undertime", autoWidth: true, render: function (data) {
+                            if (data != 0) {
+                                return "<div class='text-danger'>" + data.toFixed(2) + "</div>";
+                            }
+                            return data.toFixed(2);
+                        }
+                    },
+                    {   data: "overtime", autoWidth: true, render: function (data) { return data.toFixed(2) } },
+                    {   data: "nightDiff", autoWidth: true, render: function (data) { return data.toFixed(2) } },
+                    {
+                        data: "absent", autoWidth: true, render: function (data) {
+                            if (data!=0) {
+                                return "<div class='text-danger'>" + data.toFixed(2)+"</div>";
+                            }
+                            return data.toFixed(2);
+                        }
+                    },
+
+                ],
+                deferLoading: [0],
+                paging: false,
+                ordering: false,
+                info: false,
+                searching: false,
+                processing: true,
+                language: {
+                    "processing": "Processing... Please wait"
+                }
+            });
+        }
+
+
+       
+    </script>
+}

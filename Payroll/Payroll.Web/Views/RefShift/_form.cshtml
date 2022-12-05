@@ -1,0 +1,99 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static" >
+    <div class="modal-dialog" style="max-width: 700px!important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Shift Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="main">
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="hidden" id="ref_shift_id" />
+                                @*<div class="form-group row">
+            <label for="Shift" class="col-sm-2 col-form-label">Shift</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="shift_name" placeholder="Shift" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Shift" class="col-sm-2 col-form-label">Time In</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="shift_in" placeholder="Shift In" maxlength="5" />
+            </div>
+        </div>*@
+                                <div class="form-group">
+                                    <label for="Name">Shift</label>
+                                    <input type="text" class="form-control" id="shift_name" placeholder="Shift" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Name">Time In</label>
+                                    <input type="text" class="form-control" id="shift_in" placeholder="Shift In" maxlength="5" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Age">Time Out</label>
+                                    <input type="text" class="form-control" id="shift_out" placeholder="Shift Out" maxlength="5" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Name">Break In</label>
+                                    <input type="text" class="form-control" id="break_in" placeholder="Break In" maxlength="5" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Age">Break Out</label>
+                                    <input type="text" class="form-control" id="break_out" placeholder="Brea Out" maxlength="5" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Name">NS Start</label>
+                                    <input type="text" class="form-control" id="nd_start" placeholder="Night shift start" maxlength="5" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Age">NS End</label>
+                                    <input type="text" class="form-control" id="nd_end" placeholder="Night shift end" maxlength="5" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Age">Grace Period</label>
+                                    <input type="text" class="form-control" id="grace_period" placeholder="Grace Period" maxlength="5" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Name">Req Hr</label>
+                                    <input type="text" class="form-control" id="required_hour" placeholder="Req Hr" />
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+
+                                        <input type="checkbox" class="form-check-input" id="include_grace_period" />
+                                        <label class="form-check-label" for="Name">Include Grace Period In Late</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+
+                                        <input type="checkbox" class="form-check-input" id="is_auto_ot" />
+                                        <label class="form-check-label" for="Name">Auto Compute Overtime</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+
+                                        <input type="checkbox" class="form-check-input" id="is_nd" />
+                                        <label class="form-check-label" for="Name">Enable Night Shift</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" id="chkbx">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSave" style="display:none;" onclick="Update();">Save</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                <button type="button" class="btn btn-danger" id="btnDelete" style="display:none;" onclick="Delete();">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

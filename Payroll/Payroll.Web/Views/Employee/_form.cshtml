@@ -1,0 +1,95 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Employee Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="main">
+
+                    <input type="hidden" id="employee_id" />
+                    <div class="form-group">
+                        <label for="Name">Employee Serial</label>
+                        <input type="text" class="form-control" id="employee_serial" placeholder="Employee Serial" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Password</label>
+                        <input type="text" class="form-control" id="password" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" placeholder="Last Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">First Name</label>
+                        <input type="text" class="form-control" id="first_name" placeholder="First Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Email</label>
+                        <input type="text" class="form-control" id="email_address" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Gender</label>
+                        <input type="text" class="form-control" id="gender" placeholder="Gender" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Name">SSS</label>
+                        <input type="text" class="form-control" id="sss" placeholder="SSS" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Pagibig</label>
+                        <input type="text" class="form-control" id="pagibig" placeholder="Pagibig" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Philhealth</label>
+                        <input type="text" class="form-control" id="philhealth" placeholder="Philhealth" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Marital Status</label>
+                        <input type="text" class="form-control" id="marital_status" placeholder="Marital Status" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Contact Number</label>
+                        <input type="text" class="form-control" id="contact_number" placeholder="Contact Number" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Date Hire</label>
+                        <input type="text" class="form-control" id="date_hire" placeholder="Date Hire" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Date Resigned</label>
+                        <input type="text" class="form-control" id="date_resign" placeholder="Date Resigned" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Shift</label>
+                        <select class="custom-select" id="ref_shift_id"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select class="custom-select" id="ref_department_id"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Basic Pay</label>
+                        <input type="text" class="form-control" id="basic_pay" placeholder="Basic Pay" />
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select class="custom-select" id="role_id"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSave" style="display:none;" onclick="Update();">Save</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                <button type="button" class="btn btn-danger" id="btnDelete" style="display:none;" onclick="Delete();">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

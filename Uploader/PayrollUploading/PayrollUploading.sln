@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UploadEmployees", "UploadEmployees\UploadEmployees.csproj", "{0E80C695-F3B0-4E41-8B0D-F4AC296FD8AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UploadBiomentrics", "UploadBiomentrics\UploadBiomentrics.csproj", "{6CAFD98B-277E-44FF-93C8-0B5D018C53D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E80C695-F3B0-4E41-8B0D-F4AC296FD8AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E80C695-F3B0-4E41-8B0D-F4AC296FD8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E80C695-F3B0-4E41-8B0D-F4AC296FD8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E80C695-F3B0-4E41-8B0D-F4AC296FD8AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CAFD98B-277E-44FF-93C8-0B5D018C53D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAFD98B-277E-44FF-93C8-0B5D018C53D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAFD98B-277E-44FF-93C8-0B5D018C53D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAFD98B-277E-44FF-93C8-0B5D018C53D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6CC785AD-FDF8-4E1D-83F9-AF02927C5E7A}
+	EndGlobalSection
+EndGlobal

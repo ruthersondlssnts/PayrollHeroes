@@ -1,0 +1,2 @@
+C:\Users\biboy\Source\repos\Payroll\IntegrationTest\obj\Debug\IntegrationTest.csprojAssemblyReference.cache
+C:\Users\biboy\Source\repos\Payroll\IntegrationTest\obj\Debug\IntegrationTest.csproj.CoreCompileInputs.cache

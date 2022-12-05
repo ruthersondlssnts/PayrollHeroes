@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Payroll.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{559f6913-6455-449d-b27e-a93871319512}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Payroll.Database</RootNamespace>
+    <AssemblyName>Payroll.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Views" />
+    <Folder Include="Tables" />
+    <Folder Include="Scripts" />
+    <Folder Include="Functions" />
+    <Folder Include="Scripts\SeedScript" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\employee.sql" />
+    <Build Include="Tables\employee_balance.sql" />
+    <Build Include="Tables\employee_balance_transaction.sql" />
+    <Build Include="Tables\employee_group.sql" />
+    <Build Include="Tables\employee_role.sql" />
+    <Build Include="Tables\employee_timesheet.sql" />
+    <Build Include="Tables\payroll.sql" />
+    <Build Include="Tables\payroll_config.sql" />
+    <Build Include="Tables\payroll_details.sql" />
+    <Build Include="Tables\payroll_earning_deduction.sql" />
+    <Build Include="Tables\permission.sql" />
+    <Build Include="Tables\ref_bir.sql" />
+    <Build Include="Tables\ref_calendar_activity.sql" />
+    <Build Include="Tables\ref_configuration.sql" />
+    <Build Include="Tables\ref_day_type.sql" />
+    <Build Include="Tables\ref_department.sql" />
+    <Build Include="Tables\ref_department_approver.sql" />
+    <Build Include="Tables\ref_group.sql" />
+    <Build Include="Tables\ref_leave_type.sql" />
+    <Build Include="Tables\ref_overtime_type.sql" />
+    <Build Include="Tables\ref_pagibig.sql" />
+    <Build Include="Tables\ref_pay_type.sql" />
+    <Build Include="Tables\ref_payroll_cutoff.sql" />
+    <Build Include="Tables\ref_payroll_details_type.sql" />
+    <Build Include="Tables\ref_payroll_status.sql" />
+    <Build Include="Tables\ref_philhealth.sql" />
+    <Build Include="Tables\ref_shift.sql" />
+    <Build Include="Tables\ref_shift_detail.sql" />
+    <Build Include="Tables\ref_sss.sql" />
+    <Build Include="Tables\ref_status.sql" />
+    <Build Include="Tables\request_dtr.sql" />
+    <Build Include="Tables\request_leave.sql" />
+    <Build Include="Tables\request_overtime.sql" />
+    <Build Include="Tables\role.sql" />
+    <Build Include="Tables\role_menu.sql" />
+    <Build Include="Tables\role_permission.sql" />
+    <Build Include="Tables\timesheet_log.sql" />
+    <Build Include="dbo\Tables\ref_employee_type.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\SeedScript\1Template_SeedScript.sql" />
+    <None Include="Scripts\SeedScript\Seed1.sql" />
+  </ItemGroup>
+</Project>

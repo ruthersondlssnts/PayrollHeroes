@@ -1,0 +1,318 @@
+﻿@using System.Security.Claims
+@using TPS.Frontend.Infrastructure
+
+@{
+    bool hr_manager = false;
+    bool admin = false;
+    bool employee = false;
+    bool approver = false;
+    bool manager = false;
+
+    if (User.Identity.IsAuthenticated)
+    {
+        string access = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+
+        // roles
+        hr_manager = access.Contains(Enums.Roles.HRManager.ToString());
+        admin = access.Contains(Enums.Roles.Admin.ToString());
+        employee = access.Contains(Enums.Roles.Employee.ToString());
+        approver = access.Contains(Enums.Roles.Approver.ToString());
+        manager = access.Contains(Enums.Roles.Manager.ToString());
+    }
+
+}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="~/Home" class="brand-link">
+        <img src="~/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light">TPS</span>
+    </a>
+    <div class="sidebar">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="~/employeephotos/person.jpg" id="avatar-pic" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">Hi, @User.Identity.Name</a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="info">
+                    <a href="#" class="d-block">Hi, Admin</a>
+                </div>
+            </div>
+        }
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item has-treeview ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-cog"></i>
+                        <p>
+                            Settings
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @if (hr_manager || admin)
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="Employee" asp-action="Index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Employee</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-controller="RefShift" asp-action="Index" class="nav-link  ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Shift</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="RefPayrollCutOff" asp-action="Index" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Payroll Cutoff</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="RefLeaveType" asp-action="Index" class="nav-link  ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Leave Type</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="RefSSS" asp-action="Index" class="nav-link  ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>SSS</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="RefPagibig" asp-action="Index" class="nav-link  ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Pagibig</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="RefPhilHealth" asp-action="Index" class="nav-link  ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>PhilHealth</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="RefBIR" asp-action="Index" class="nav-link  ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>BIR</p>
+                                </a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a asp-controller="EmployeeBalance" asp-action="Index" class="nav-link  ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employee Leave Bal</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="RefCalendarActivity" asp-action="Index" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Calendar Activities</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="RefGroup" asp-action="Index" class="nav-link ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Groupings</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview  ">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>
+                            Timesheet
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        @if (hr_manager || admin)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="EmployeeTimesheet" asp-action="Process">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Processing</p>
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link " asp-controller="EmployeeTimesheet" asp-action="Index">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>DTR</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Calendar" asp-action="EmployeeDTR">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Emp Calendar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview  ">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                        <p>
+                            Request
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-controller="RequestOvertime" asp-action="Index">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Overtime</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="RequestLeave" asp-action="Index">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Leave</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  " asp-controller="RequestDTR" asp-action="Index">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>DTR Correction</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link  " @*asp-controller="RequestDTR" asp-action="Index"*@>
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Change Shift</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview ">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-file-alt"></i>
+
+                        <p>
+                            Report
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="EmployeeTimesheet" asp-action="TimesheetReport">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>DTR Report</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @if (hr_manager || admin)
+                {
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class=" nav-icon fas fa-user-check"></i>
+                            <p>
+                                For Approval
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Calendar" asp-action="Index">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Leave Calendar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="RequestLeave" asp-action="Approvals">
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>Leave</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="RequestOvertime" asp-action="Approvals">
+                                    <i class="far fa-circle nav-icon"></i>
+
+                                    <p>Overtime</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="RequestDTR" asp-action="Approvals">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>DTR Correction</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  " @*asp-controller="RequestDTR" asp-action="Index"*@>
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Change Shift</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-money-bill"></i>
+                        <p>
+                            Payroll
+                        </p>
+                    </a>
+
+                </li>
+                @*<li class="nav-item ">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link ">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>
+                                Home
+                            </p>
+                        </a>
+                    </li>*@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item ">
+                        <a asp-controller="Home" asp-action="Privacy" class="nav-link ">
+                            <i class="nav-icon fas fa-lock"></i>
+                            <p>
+                                Privacy
+                            </p>
+                        </a>
+                    </li>
+                }
+
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+
+

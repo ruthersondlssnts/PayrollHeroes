@@ -1,0 +1,11 @@
+﻿<script>
+    function DeleteLink(link) {
+        return '<form style="display: inline-flex;" onsubmit="return jQueryAjaxDelete(this);" action="' + link
+            + '" method="post"><button style="padding:0px" class="btn btn-link" type="submit" >Delete</button>'
+            + '@Html.AntiForgeryToken()' + '</form>'
+    }
+
+    function EditLink(link,title,data) {
+        return '<a href="#" onclick="ModalAddEdit(&quot;' + link + '&quot;,&quot;' + title + '&quot;,true)">' + data + '</a>'
+    }
+</script>

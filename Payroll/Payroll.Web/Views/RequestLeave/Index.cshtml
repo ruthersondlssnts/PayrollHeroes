@@ -1,0 +1,62 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Employee Leave";
+
+}
+@using System.Security.Claims
+@using Payroll.Core.Entities;
+@{
+    string access = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-block btn-default" id="process" onclick="return getbyID()">Request Leave</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Leave</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="jsGrid1"></div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+            @if (access.Contains(Enums.access.view_leave_balance.GetDescription()))
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Employee Balance</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div id="jsGrid2"></div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            }
+            </div>
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+
+<partial name="_form" />
+
+@section scripts {
+
+    <script src="~/js/app/RequestLeave/get.js"></script>
+    <script src="~/js/app/RequestLeave/grid.js"></script>
+    <script src="~/js/app/RequestLeave/update.js"></script>
+    <script src="~/js/app/RequestLeave/validation.js"></script>
+    <script src="~/js/app/RequestLeave/_initialize.js"></script>
+}

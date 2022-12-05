@@ -1,0 +1,416 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Employee Leave";
+
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Search</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <!-- select -->
+                            <div class="form-group">
+                                <label>Cutoff</label>
+                                <select class="custom-select" id="cutoff"></select>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select class="custom-select" id="company"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Branch</label>
+                                <select class="custom-select" id="branch"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select class="custom-select" id="department"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn btn-block btn-default" id="search" onclick="return search()">Search</button>
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn btn-block btn-default" id="export" onclick="return exportdtr()">Export</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Employee DTR</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="jsGrid1"></div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+
+
+@section scripts {
+    <script>
+
+        $(document).ready(function () {
+            GetCutoff();
+            getCompany();
+            //$('#cutoff').change(function () {
+            //    Grid();
+            //});
+            $('#company').change(function () {
+                getBranch();
+                getDepartment();
+            });
+            $('#branch').change(function () {
+                getDepartment();
+            });
+            $('#department').change(function () {
+
+            });
+        });
+
+        function Grid(id) {
+            Swal.fire({
+                title: 'Please Wait..!',
+                text: 'Is working..',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                onOpen: () => {
+                    swal.showLoading()
+                }
+            })
+
+               var data = {
+                 'ref_payroll_cutoff_id':  $("#cutoff").val(),
+                 'group_id':id
+               };
+                $("#jsGrid1").jsGrid({
+
+                width: "100%",
+                pageSize: 15,
+                sorting: true,
+                paging: true,
+                autoload: true,
+                controller: {
+                    loadData: function (filter) {
+                        var urli = '@Url.Action("GetAllEmployeeTimeSheetDTR", "EmployeeTimesheet")';
+
+                        return $.ajax({
+                            type: "GET",
+                            url: urli,
+                            data: data,
+                            dataType: "JSON",
+                            success: function (data) {
+                                Swal.hideLoading();
+                                swal_loadcomplete();
+                            }
+                        });
+                    }
+                },
+
+                    fields: [
+                    {
+                        title: "Name", type: "text", width: 50,
+                        itemTemplate: function (value, item) {
+                            return item.last_name + ', ' + item.first_name;
+                        },
+                    },
+                    {
+                        name: "shift_date", title: "Date", type: "text", width: 30,
+                        itemTemplate: function (value, item) {
+                            var d = value.slice(0, 10).split('-');
+                            var val = d[1] + '/' + d[2] + '/' + d[0];
+                            return '<a href="#" onclick="return getbyID(' + item.employee_timesheet_id + ')">' + val + '</a>';
+                        },
+                    },
+                    {
+                        name: "shift_date", title: "Day", type: "text", width: 20,
+                        itemTemplate: function (value, item) {
+                            var weekday = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+                            var a = new Date(value);
+                            return weekday[a.getDay()];
+                        },
+                    },
+                    { name: "shift_name", title: "Shift", width: 40 },
+                    { name: "date_type_code", title: "Type", width: 30 },
+                    {
+                        name: "required_hour", title: "RqHr", type: "number", width: 20,
+                        itemTemplate: function (value) {
+                            if (value != null && value != 0) {
+                                return value.toFixed(2);
+                            } else {
+                                return '0.00';
+                            }
+
+                        },
+                    },
+                    {
+                        name: "rendered_hour", title: "RdHr", type: "number", width: 20,
+                        itemTemplate: function (value) {
+                            if (value != null && value != 0) {
+                                return value.toFixed(2);
+                            } else {
+                                return '0.00';
+                            }
+
+                        },
+                    },
+                    {
+                        name: "time_in1", title: "In", type: "text", width: 20,
+                        itemTemplate: function (value,item) {
+                            if (value == null && value != 0) {
+                                return item.time_in2;
+                            } else {
+                                return value;
+                            }
+
+                        }
+                    },
+                    {
+                        name: "time_out1", title: "Out", type: "text", width: 20,
+                        itemTemplate: function (value, item) {
+                            if (value == null && value != 0) {
+                                return item.time_out2;
+                            } else {
+                                return value;
+                            }
+
+                        }
+                    },
+                    { name: "ot_in", title: "OtIn", type: "number", width: 20 },
+                    { name: "ot_out", title: "OTOut", type: "number", width: 20 },
+                    {
+                        name: "late", title: "Late", type: "number", width: 20,
+                        itemTemplate: function (value) {
+
+                            if (value != null && value != 0) {
+                                return '<span style="color: red;">' + value.toFixed(2) + '</span>';
+                            } else {
+                                return '0.00';
+                            }
+
+                        },
+                    },
+                    {
+                        name: "undertime", title: "UT", type: "number", width: 20,
+                        itemTemplate: function (value) {
+                            if (value != null && value != 0) {
+                                return '<span style="color: red;">' + value.toFixed(2) + '</span>';
+                            } else {
+                                return '0.00';
+                            }
+
+                        },
+                    },
+                    {
+                        name: "ot", title: "OT", type: "number", width: 20,
+
+                        itemTemplate: function (value) {
+                            if (value != null && value != 0) {
+                                return value.toFixed(2);
+                            } else {
+                                return '0.00';
+                            }
+
+                        },
+                    },
+                    {
+                        name: "ot8", title: "OT8", type: "number", width: 20,
+                        itemTemplate: function (value) {
+                            if (value != null && value != 0) {
+                                return value.toFixed(2);
+                            } else {
+                                return '0.00';
+                            }
+
+                        },
+                    },
+                    {
+                        name: "night_dif", title: "ND", type: "number", width: 20,
+                        itemTemplate: function (value) {
+                            if (value != null && value != 0) {
+                                return value.toFixed(2);
+                            } else {
+                                return '0.00';
+                            }
+
+                        },
+                    },
+                    {
+                        name: "absent", title: "AB", type: "number", width: 20,
+                        itemTemplate: function (value) {
+                            if (value != null && value != 0) {
+                                return '<span style="color: red;">' + value.toFixed(2) + '</span>';
+                            } else {
+                                return '0.00';
+                            }
+
+                        },
+                    },
+
+                ]
+                });
+        }
+
+         function GetCutoff() {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetCutoff", "EmployeeTimesheet")',
+                data: "{}",
+                success: function (data) {
+                    var s = '';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].ref_payroll_cutoff_id + '">' + data[i].ref_payroll_cutoff_name + '</option>';
+                    }
+                    $("#cutoff").html(s);
+                }
+
+            });
+        }
+
+        function getCompany() {
+            var data = {
+                 'level':  1,
+                 'group_id':0
+            };
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetGroup", "EmployeeTimesheet")',
+                data: data,
+                success: function (data) {
+                    var s = '<option value=0>-- ALL --</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].group_id + '">' + data[i].name + '</option>';
+                    }
+                    $("#company").html(s);
+                    $("#company").select2();
+                    getBranch();
+                }
+
+            });
+
+
+        }
+
+        function getBranch() {
+            var data = {
+                 'level':  2,
+                 'group_id':$("#company").val()
+            };
+
+            if ($("#company").val() != 0) {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetGroup", "EmployeeTimesheet")',
+                    data: data,
+                    success: function (data) {
+                        var s = '<option value=0>-- ALL --</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            s += '<option value="' + data[i].group_id + '">' + data[i].name + '</option>';
+                        }
+                        $("#branch").html(s);
+                        $("#branch").select2();
+                        getDepartment();
+                    }
+                });
+            }
+            else {
+                $("#branch").html('<option value=0>-- ALL --</option>');
+                $("#branch").select2();
+                getDepartment();
+            }
+
+
+        }
+
+        function getDepartment() {
+
+            var data = {
+                 'level': 3,
+                 'group_id':$("#branch").val()
+            };
+            if ($("#branch").val() != 0) {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetGroup", "EmployeeTimesheet")',
+                    data: data,
+                    success: function (data) {
+                        var s = '<option value=0>-- ALL --</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            s += '<option value="' + data[i].group_id + '">' + data[i].name + '</option>';
+                        }
+                        $("#department").html(s);
+                        $("#department").select2();
+                    }
+                });
+            }
+            else {
+                $("#department").html('<option value=0>-- ALL --</option>');
+                $("#department").select2();
+            }
+
+
+        }
+
+        function search() {
+            if ($("#department").val() != 0) {
+                Grid($("#department").val());
+            }
+            else
+                if ($("#branch").val() != 0) {
+                    Grid($("#branch").val());
+                }
+                else
+                    if ($("#company").val() != 0) {
+                        Grid($("#company").val());
+                    }
+                    else { Grid(1); }
+        }
+        function exportdtr() {
+            if ($("#department").val() != 0) {
+                exportGrid($("#department").val());
+            }
+            else
+                if ($("#branch").val() != 0) {
+                    exportGrid($("#branch").val());
+                }
+                else
+                    if ($("#company").val() != 0) {
+                        exportGrid($("#company").val());
+                    }
+                    else { exportGrid(1); }
+        }
+
+        function exportGrid(id) {
+            var data = {
+                 'ref_payroll_cutoff_id':  $("#cutoff").val(),
+                 'group_id':id
+            };
+            window.location = '@Url.Action("ExportDTR", "EmployeeTimesheet")' + '?ref_payroll_cutoff_id=' + $("#cutoff").val() + "&group_id=" + id;
+
+        }
+    </script>
+}

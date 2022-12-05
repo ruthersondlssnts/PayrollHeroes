@@ -1,0 +1,43 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Employee DTR Correction";
+
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-block btn-default" id="process" onclick="return getbyID()">Request DTR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">DTR</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="jsGrid1"></div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+
+<partial name="_form" />
+
+@section scripts {
+
+    <script src="~/js/app/RequestDTR/get.js"></script>
+    <script src="~/js/app/RequestDTR/grid.js"></script>
+    <script src="~/js/app/RequestDTR/update.js"></script>
+    <script src="~/js/app/RequestDTR/validation.js"></script>
+    <script src="~/js/app/RequestDTR/_initialize.js"></script>
+}

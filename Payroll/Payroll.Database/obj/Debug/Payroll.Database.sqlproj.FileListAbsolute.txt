@@ -1,0 +1,6 @@
+C:\Users\biboy\Source\repos\Payroll\Payroll.Database\bin\Debug\Payroll.Database.dacpac
+C:\Users\biboy\Source\repos\Payroll\Payroll.Database\bin\Debug\Payroll.Database.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Database\bin\Debug\Payroll.Database.pdb
+C:\Users\biboy\Source\repos\Payroll\Payroll.Database\obj\Debug\Payroll.Database.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Database\obj\Debug\Payroll.Database.pdb
+C:\Users\biboy\Source\repos\Payroll\Payroll.Database\obj\Debug\Payroll.Database.sqlprojAssemblyReference.cache

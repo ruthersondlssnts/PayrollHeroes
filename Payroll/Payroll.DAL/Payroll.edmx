@@ -1,0 +1,766 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PayrollDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employee_serial" Type="varchar" MaxLength="20" />
+          <Property Name="last_name" Type="varchar" MaxLength="200" />
+          <Property Name="first_name" Type="varchar" MaxLength="200" />
+          <Property Name="middle_name" Type="varchar" MaxLength="200" />
+          <Property Name="email_address" Type="varchar" MaxLength="200" />
+          <Property Name="gender" Type="varchar" MaxLength="10" />
+          <Property Name="contact_number" Type="varchar" MaxLength="100" />
+          <Property Name="sss" Type="varchar" MaxLength="50" />
+          <Property Name="pagibig" Type="varchar" MaxLength="50" />
+          <Property Name="philhealth" Type="varchar" MaxLength="50" />
+          <Property Name="marital_status" Type="varchar" MaxLength="20" />
+          <Property Name="date_hire" Type="date" />
+          <Property Name="date_resign" Type="date" />
+          <Property Name="ref_shift_id" Type="int" Nullable="false" />
+          <Property Name="ref_department_id" Type="int" Nullable="false" />
+          <Property Name="fingerprint" Type="varchar" MaxLength="50" />
+          <Property Name="basic_pay" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="date_deleted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="employee_timesheet">
+          <Key>
+            <PropertyRef Name="employee_timesheet_id" />
+          </Key>
+          <Property Name="employee_timesheet_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="shift_date" Type="date" />
+          <Property Name="ref_shift_id" Type="int" Nullable="false" />
+          <Property Name="ref_day_type_id" Type="int" Nullable="false" />
+          <Property Name="required_hour" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="rendered_hour" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="time_in1" Type="time" Precision="7" />
+          <Property Name="time_out1" Type="time" Precision="7" />
+          <Property Name="time_in2" Type="time" Precision="7" />
+          <Property Name="time_out2" Type="time" Precision="7" />
+          <Property Name="ot_in" Type="time" Precision="7" />
+          <Property Name="ot_out" Type="time" Precision="7" />
+          <Property Name="ot" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ot8" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="night_dif" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="night_dif8" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="payroll_process" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ref_calendar_activity">
+          <Key>
+            <PropertyRef Name="ref_calendar_activity_id" />
+          </Key>
+          <Property Name="ref_calendar_activity_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="work_date" Type="date" />
+          <Property Name="ref_day_type_id" Type="int" />
+          <Property Name="date_deleted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ref_day_type">
+          <Key>
+            <PropertyRef Name="ref_day_type_id" />
+          </Key>
+          <Property Name="ref_day_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_type_code" Type="varchar" MaxLength="50" />
+          <Property Name="date_type_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ref_department">
+          <Key>
+            <PropertyRef Name="ref_department_id" />
+          </Key>
+          <Property Name="ref_department_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="department_name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ref_pagibig">
+          <Key>
+            <PropertyRef Name="ref_pagibig_id" />
+          </Key>
+          <Property Name="ref_pagibig_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="salary_from" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="salary_to" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="computation" Type="varchar" MaxLength="50" />
+          <Property Name="employee_contribution" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="employer_contribution" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="flat_rate" Type="bit" Nullable="false" />
+          <Property Name="date_deleted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ref_payroll_status">
+          <Key>
+            <PropertyRef Name="ref_payroll_status_id" />
+          </Key>
+          <Property Name="ref_payroll_status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="payroll_status_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ref_philhealth">
+          <Key>
+            <PropertyRef Name="ref_philhealth_id" />
+          </Key>
+          <Property Name="ref_philhealth_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="salary_from" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="salary_to" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="computation" Type="varchar" MaxLength="50" />
+          <Property Name="date_deleted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ref_shift">
+          <Key>
+            <PropertyRef Name="ref_shift_id" />
+          </Key>
+          <Property Name="ref_shift_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shift_name" Type="varchar" MaxLength="50" />
+          <Property Name="shift_in" Type="time" Precision="7" />
+          <Property Name="shift_out" Type="time" Precision="7" />
+          <Property Name="break_in" Type="time" Precision="7" />
+          <Property Name="break_out" Type="time" Precision="7" />
+          <Property Name="break_hour" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="required_hour" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="date_deleted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ref_shift_detail">
+          <Key>
+            <PropertyRef Name="ref_shift_detail_id" />
+          </Key>
+          <Property Name="ref_shift_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ref_shift_id" Type="int" Nullable="false" />
+          <Property Name="day" Type="varchar" MaxLength="10" />
+          <Property Name="required_hour" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="rest_day" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ref_sss">
+          <Key>
+            <PropertyRef Name="ref_sss_id" />
+          </Key>
+          <Property Name="ref_sss_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="salary_from" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="salary_to" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="employee_share" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="employer_share" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="total_contribution" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="date_deleted" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="timesheet_log">
+          <Key>
+            <PropertyRef Name="timesheet_log_id" />
+          </Key>
+          <Property Name="timesheet_log_id" Type="bigint" Nullable="false" />
+          <Property Name="employee_serial" Type="varchar" MaxLength="20" />
+          <Property Name="datetime_in" Type="datetime" />
+          <Property Name="datetime_out" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_employee_ref_department">
+          <End Role="ref_department" Type="Self.ref_department" Multiplicity="1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_department">
+              <PropertyRef Name="ref_department_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="ref_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_ref_shift">
+          <End Role="ref_shift" Type="Self.ref_shift" Multiplicity="1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_shift">
+              <PropertyRef Name="ref_shift_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="ref_shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_timesheet_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="employee_timesheet" Type="Self.employee_timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="employee_timesheet">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_timesheet_ref_day_type">
+          <End Role="ref_day_type" Type="Self.ref_day_type" Multiplicity="1" />
+          <End Role="employee_timesheet" Type="Self.employee_timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_day_type">
+              <PropertyRef Name="ref_day_type_id" />
+            </Principal>
+            <Dependent Role="employee_timesheet">
+              <PropertyRef Name="ref_day_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_timesheet_ref_shift">
+          <End Role="ref_shift" Type="Self.ref_shift" Multiplicity="1" />
+          <End Role="employee_timesheet" Type="Self.employee_timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_shift">
+              <PropertyRef Name="ref_shift_id" />
+            </Principal>
+            <Dependent Role="employee_timesheet">
+              <PropertyRef Name="ref_shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ref_shift_detail_ref_shift">
+          <End Role="ref_shift" Type="Self.ref_shift" Multiplicity="1" />
+          <End Role="ref_shift_detail" Type="Self.ref_shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_shift">
+              <PropertyRef Name="ref_shift_id" />
+            </Principal>
+            <Dependent Role="ref_shift_detail">
+              <PropertyRef Name="ref_shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PayrollDBModelStoreContainer">
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee_timesheet" EntityType="Self.employee_timesheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_calendar_activity" EntityType="Self.ref_calendar_activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_day_type" EntityType="Self.ref_day_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_department" EntityType="Self.ref_department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_pagibig" EntityType="Self.ref_pagibig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_payroll_status" EntityType="Self.ref_payroll_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_philhealth" EntityType="Self.ref_philhealth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_shift" EntityType="Self.ref_shift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_shift_detail" EntityType="Self.ref_shift_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ref_sss" EntityType="Self.ref_sss" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="timesheet_log" EntityType="Self.timesheet_log" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_employee_ref_department" Association="Self.FK_employee_ref_department">
+            <End Role="ref_department" EntitySet="ref_department" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_ref_shift" Association="Self.FK_employee_ref_shift">
+            <End Role="ref_shift" EntitySet="ref_shift" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_timesheet_employee" Association="Self.FK_employee_timesheet_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="employee_timesheet" EntitySet="employee_timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_timesheet_ref_day_type" Association="Self.FK_employee_timesheet_ref_day_type">
+            <End Role="ref_day_type" EntitySet="ref_day_type" />
+            <End Role="employee_timesheet" EntitySet="employee_timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_timesheet_ref_shift" Association="Self.FK_employee_timesheet_ref_shift">
+            <End Role="ref_shift" EntitySet="ref_shift" />
+            <End Role="employee_timesheet" EntitySet="employee_timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ref_shift_detail_ref_shift" Association="Self.FK_ref_shift_detail_ref_shift">
+            <End Role="ref_shift" EntitySet="ref_shift" />
+            <End Role="ref_shift_detail" EntitySet="ref_shift_detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PayrollDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employee_serial" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="first_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="middle_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="email_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="contact_number" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="sss" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pagibig" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="philhealth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="marital_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="date_hire" Type="DateTime" Precision="0" />
+          <Property Name="date_resign" Type="DateTime" Precision="0" />
+          <Property Name="ref_shift_id" Type="Int32" Nullable="false" />
+          <Property Name="ref_department_id" Type="Int32" Nullable="false" />
+          <Property Name="fingerprint" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="basic_pay" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="date_deleted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ref_department" Relationship="Self.FK_employee_ref_department" FromRole="employee" ToRole="ref_department" />
+          <NavigationProperty Name="ref_shift" Relationship="Self.FK_employee_ref_shift" FromRole="employee" ToRole="ref_shift" />
+          <NavigationProperty Name="employee_timesheet" Relationship="Self.FK_employee_timesheet_employee" FromRole="employee" ToRole="employee_timesheet" />
+        </EntityType>
+        <EntityType Name="employee_timesheet">
+          <Key>
+            <PropertyRef Name="employee_timesheet_id" />
+          </Key>
+          <Property Name="employee_timesheet_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="shift_date" Type="DateTime" Precision="0" />
+          <Property Name="ref_shift_id" Type="Int32" Nullable="false" />
+          <Property Name="ref_day_type_id" Type="Int32" Nullable="false" />
+          <Property Name="required_hour" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="rendered_hour" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="time_in1" Type="Time" Precision="7" />
+          <Property Name="time_out1" Type="Time" Precision="7" />
+          <Property Name="time_in2" Type="Time" Precision="7" />
+          <Property Name="time_out2" Type="Time" Precision="7" />
+          <Property Name="ot_in" Type="Time" Precision="7" />
+          <Property Name="ot_out" Type="Time" Precision="7" />
+          <Property Name="ot" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ot8" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="night_dif" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="night_dif8" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="payroll_process" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_employee_timesheet_employee" FromRole="employee_timesheet" ToRole="employee" />
+          <NavigationProperty Name="ref_day_type" Relationship="Self.FK_employee_timesheet_ref_day_type" FromRole="employee_timesheet" ToRole="ref_day_type" />
+          <NavigationProperty Name="ref_shift" Relationship="Self.FK_employee_timesheet_ref_shift" FromRole="employee_timesheet" ToRole="ref_shift" />
+        </EntityType>
+        <EntityType Name="ref_calendar_activity">
+          <Key>
+            <PropertyRef Name="ref_calendar_activity_id" />
+          </Key>
+          <Property Name="ref_calendar_activity_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="work_date" Type="DateTime" Precision="0" />
+          <Property Name="ref_day_type_id" Type="Int32" />
+          <Property Name="date_deleted" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ref_day_type">
+          <Key>
+            <PropertyRef Name="ref_day_type_id" />
+          </Key>
+          <Property Name="ref_day_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_type_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date_type_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employee_timesheet" Relationship="Self.FK_employee_timesheet_ref_day_type" FromRole="ref_day_type" ToRole="employee_timesheet" />
+        </EntityType>
+        <EntityType Name="ref_department">
+          <Key>
+            <PropertyRef Name="ref_department_id" />
+          </Key>
+          <Property Name="ref_department_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="department_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_employee_ref_department" FromRole="ref_department" ToRole="employee" />
+        </EntityType>
+        <EntityType Name="ref_pagibig">
+          <Key>
+            <PropertyRef Name="ref_pagibig_id" />
+          </Key>
+          <Property Name="ref_pagibig_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salary_from" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="salary_to" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="computation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="employee_contribution" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="employer_contribution" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="flat_rate" Type="Boolean" Nullable="false" />
+          <Property Name="date_deleted" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ref_payroll_status">
+          <Key>
+            <PropertyRef Name="ref_payroll_status_id" />
+          </Key>
+          <Property Name="ref_payroll_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="payroll_status_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ref_philhealth">
+          <Key>
+            <PropertyRef Name="ref_philhealth_id" />
+          </Key>
+          <Property Name="ref_philhealth_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salary_from" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="salary_to" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="computation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date_deleted" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ref_shift">
+          <Key>
+            <PropertyRef Name="ref_shift_id" />
+          </Key>
+          <Property Name="ref_shift_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shift_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shift_in" Type="Time" Precision="7" />
+          <Property Name="shift_out" Type="Time" Precision="7" />
+          <Property Name="break_in" Type="Time" Precision="7" />
+          <Property Name="break_out" Type="Time" Precision="7" />
+          <Property Name="break_hour" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="required_hour" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="date_deleted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="employee" Relationship="Self.FK_employee_ref_shift" FromRole="ref_shift" ToRole="employee" />
+          <NavigationProperty Name="employee_timesheet" Relationship="Self.FK_employee_timesheet_ref_shift" FromRole="ref_shift" ToRole="employee_timesheet" />
+          <NavigationProperty Name="ref_shift_detail" Relationship="Self.FK_ref_shift_detail_ref_shift" FromRole="ref_shift" ToRole="ref_shift_detail" />
+        </EntityType>
+        <EntityType Name="ref_shift_detail">
+          <Key>
+            <PropertyRef Name="ref_shift_detail_id" />
+          </Key>
+          <Property Name="ref_shift_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ref_shift_id" Type="Int32" Nullable="false" />
+          <Property Name="day" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="required_hour" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="rest_day" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ref_shift" Relationship="Self.FK_ref_shift_detail_ref_shift" FromRole="ref_shift_detail" ToRole="ref_shift" />
+        </EntityType>
+        <EntityType Name="ref_sss">
+          <Key>
+            <PropertyRef Name="ref_sss_id" />
+          </Key>
+          <Property Name="ref_sss_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salary_from" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="salary_to" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="employee_share" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="employer_share" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="total_contribution" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="date_deleted" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="timesheet_log">
+          <Key>
+            <PropertyRef Name="timesheet_log_id" />
+          </Key>
+          <Property Name="timesheet_log_id" Type="Int64" Nullable="false" />
+          <Property Name="employee_serial" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="datetime_in" Type="DateTime" Precision="3" />
+          <Property Name="datetime_out" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_employee_ref_department">
+          <End Role="ref_department" Type="Self.ref_department" Multiplicity="1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_department">
+              <PropertyRef Name="ref_department_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="ref_department_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_ref_shift">
+          <End Role="ref_shift" Type="Self.ref_shift" Multiplicity="1" />
+          <End Role="employee" Type="Self.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_shift">
+              <PropertyRef Name="ref_shift_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="ref_shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_timesheet_employee">
+          <End Role="employee" Type="Self.employee" Multiplicity="1" />
+          <End Role="employee_timesheet" Type="Self.employee_timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="employee_id" />
+            </Principal>
+            <Dependent Role="employee_timesheet">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_timesheet_ref_day_type">
+          <End Role="ref_day_type" Type="Self.ref_day_type" Multiplicity="1" />
+          <End Role="employee_timesheet" Type="Self.employee_timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_day_type">
+              <PropertyRef Name="ref_day_type_id" />
+            </Principal>
+            <Dependent Role="employee_timesheet">
+              <PropertyRef Name="ref_day_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_timesheet_ref_shift">
+          <End Role="ref_shift" Type="Self.ref_shift" Multiplicity="1" />
+          <End Role="employee_timesheet" Type="Self.employee_timesheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_shift">
+              <PropertyRef Name="ref_shift_id" />
+            </Principal>
+            <Dependent Role="employee_timesheet">
+              <PropertyRef Name="ref_shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ref_shift_detail_ref_shift">
+          <End Role="ref_shift" Type="Self.ref_shift" Multiplicity="1" />
+          <End Role="ref_shift_detail" Type="Self.ref_shift_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ref_shift">
+              <PropertyRef Name="ref_shift_id" />
+            </Principal>
+            <Dependent Role="ref_shift_detail">
+              <PropertyRef Name="ref_shift_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PayrollDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="employee" EntityType="Self.employee" />
+          <EntitySet Name="employee_timesheet" EntityType="Self.employee_timesheet" />
+          <EntitySet Name="ref_calendar_activity" EntityType="Self.ref_calendar_activity" />
+          <EntitySet Name="ref_day_type" EntityType="Self.ref_day_type" />
+          <EntitySet Name="ref_department" EntityType="Self.ref_department" />
+          <EntitySet Name="ref_pagibig" EntityType="Self.ref_pagibig" />
+          <EntitySet Name="ref_payroll_status" EntityType="Self.ref_payroll_status" />
+          <EntitySet Name="ref_philhealth" EntityType="Self.ref_philhealth" />
+          <EntitySet Name="ref_shift" EntityType="Self.ref_shift" />
+          <EntitySet Name="ref_shift_detail" EntityType="Self.ref_shift_detail" />
+          <EntitySet Name="ref_sss" EntityType="Self.ref_sss" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="timesheet_log" EntityType="Self.timesheet_log" />
+          <AssociationSet Name="FK_employee_ref_department" Association="Self.FK_employee_ref_department">
+            <End Role="ref_department" EntitySet="ref_department" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_ref_shift" Association="Self.FK_employee_ref_shift">
+            <End Role="ref_shift" EntitySet="ref_shift" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_timesheet_employee" Association="Self.FK_employee_timesheet_employee">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="employee_timesheet" EntitySet="employee_timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_timesheet_ref_day_type" Association="Self.FK_employee_timesheet_ref_day_type">
+            <End Role="ref_day_type" EntitySet="ref_day_type" />
+            <End Role="employee_timesheet" EntitySet="employee_timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_timesheet_ref_shift" Association="Self.FK_employee_timesheet_ref_shift">
+            <End Role="ref_shift" EntitySet="ref_shift" />
+            <End Role="employee_timesheet" EntitySet="employee_timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ref_shift_detail_ref_shift" Association="Self.FK_ref_shift_detail_ref_shift">
+            <End Role="ref_shift" EntitySet="ref_shift" />
+            <End Role="ref_shift_detail" EntitySet="ref_shift_detail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PayrollDBModelStoreContainer" CdmEntityContainer="PayrollDBEntities">
+          <EntitySetMapping Name="employee">
+            <EntityTypeMapping TypeName="PayrollDBModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="employee_serial" ColumnName="employee_serial" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+                <ScalarProperty Name="email_address" ColumnName="email_address" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="contact_number" ColumnName="contact_number" />
+                <ScalarProperty Name="sss" ColumnName="sss" />
+                <ScalarProperty Name="pagibig" ColumnName="pagibig" />
+                <ScalarProperty Name="philhealth" ColumnName="philhealth" />
+                <ScalarProperty Name="marital_status" ColumnName="marital_status" />
+                <ScalarProperty Name="date_hire" ColumnName="date_hire" />
+                <ScalarProperty Name="date_resign" ColumnName="date_resign" />
+                <ScalarProperty Name="ref_shift_id" ColumnName="ref_shift_id" />
+                <ScalarProperty Name="ref_department_id" ColumnName="ref_department_id" />
+                <ScalarProperty Name="fingerprint" ColumnName="fingerprint" />
+                <ScalarProperty Name="basic_pay" ColumnName="basic_pay" />
+                <ScalarProperty Name="date_deleted" ColumnName="date_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee_timesheet">
+            <EntityTypeMapping TypeName="PayrollDBModel.employee_timesheet">
+              <MappingFragment StoreEntitySet="employee_timesheet">
+                <ScalarProperty Name="employee_timesheet_id" ColumnName="employee_timesheet_id" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="shift_date" ColumnName="shift_date" />
+                <ScalarProperty Name="ref_shift_id" ColumnName="ref_shift_id" />
+                <ScalarProperty Name="ref_day_type_id" ColumnName="ref_day_type_id" />
+                <ScalarProperty Name="required_hour" ColumnName="required_hour" />
+                <ScalarProperty Name="rendered_hour" ColumnName="rendered_hour" />
+                <ScalarProperty Name="time_in1" ColumnName="time_in1" />
+                <ScalarProperty Name="time_out1" ColumnName="time_out1" />
+                <ScalarProperty Name="time_in2" ColumnName="time_in2" />
+                <ScalarProperty Name="time_out2" ColumnName="time_out2" />
+                <ScalarProperty Name="ot_in" ColumnName="ot_in" />
+                <ScalarProperty Name="ot_out" ColumnName="ot_out" />
+                <ScalarProperty Name="ot" ColumnName="ot" />
+                <ScalarProperty Name="ot8" ColumnName="ot8" />
+                <ScalarProperty Name="night_dif" ColumnName="night_dif" />
+                <ScalarProperty Name="night_dif8" ColumnName="night_dif8" />
+                <ScalarProperty Name="payroll_process" ColumnName="payroll_process" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_calendar_activity">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_calendar_activity">
+              <MappingFragment StoreEntitySet="ref_calendar_activity">
+                <ScalarProperty Name="ref_calendar_activity_id" ColumnName="ref_calendar_activity_id" />
+                <ScalarProperty Name="work_date" ColumnName="work_date" />
+                <ScalarProperty Name="ref_day_type_id" ColumnName="ref_day_type_id" />
+                <ScalarProperty Name="date_deleted" ColumnName="date_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_day_type">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_day_type">
+              <MappingFragment StoreEntitySet="ref_day_type">
+                <ScalarProperty Name="ref_day_type_id" ColumnName="ref_day_type_id" />
+                <ScalarProperty Name="date_type_code" ColumnName="date_type_code" />
+                <ScalarProperty Name="date_type_name" ColumnName="date_type_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_department">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_department">
+              <MappingFragment StoreEntitySet="ref_department">
+                <ScalarProperty Name="ref_department_id" ColumnName="ref_department_id" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_pagibig">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_pagibig">
+              <MappingFragment StoreEntitySet="ref_pagibig">
+                <ScalarProperty Name="ref_pagibig_id" ColumnName="ref_pagibig_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="salary_from" ColumnName="salary_from" />
+                <ScalarProperty Name="salary_to" ColumnName="salary_to" />
+                <ScalarProperty Name="computation" ColumnName="computation" />
+                <ScalarProperty Name="employee_contribution" ColumnName="employee_contribution" />
+                <ScalarProperty Name="employer_contribution" ColumnName="employer_contribution" />
+                <ScalarProperty Name="flat_rate" ColumnName="flat_rate" />
+                <ScalarProperty Name="date_deleted" ColumnName="date_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_payroll_status">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_payroll_status">
+              <MappingFragment StoreEntitySet="ref_payroll_status">
+                <ScalarProperty Name="ref_payroll_status_id" ColumnName="ref_payroll_status_id" />
+                <ScalarProperty Name="payroll_status_name" ColumnName="payroll_status_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_philhealth">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_philhealth">
+              <MappingFragment StoreEntitySet="ref_philhealth">
+                <ScalarProperty Name="ref_philhealth_id" ColumnName="ref_philhealth_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="salary_from" ColumnName="salary_from" />
+                <ScalarProperty Name="salary_to" ColumnName="salary_to" />
+                <ScalarProperty Name="computation" ColumnName="computation" />
+                <ScalarProperty Name="date_deleted" ColumnName="date_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_shift">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_shift">
+              <MappingFragment StoreEntitySet="ref_shift">
+                <ScalarProperty Name="ref_shift_id" ColumnName="ref_shift_id" />
+                <ScalarProperty Name="shift_name" ColumnName="shift_name" />
+                <ScalarProperty Name="shift_in" ColumnName="shift_in" />
+                <ScalarProperty Name="shift_out" ColumnName="shift_out" />
+                <ScalarProperty Name="break_in" ColumnName="break_in" />
+                <ScalarProperty Name="break_out" ColumnName="break_out" />
+                <ScalarProperty Name="break_hour" ColumnName="break_hour" />
+                <ScalarProperty Name="required_hour" ColumnName="required_hour" />
+                <ScalarProperty Name="date_deleted" ColumnName="date_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_shift_detail">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_shift_detail">
+              <MappingFragment StoreEntitySet="ref_shift_detail">
+                <ScalarProperty Name="ref_shift_detail_id" ColumnName="ref_shift_detail_id" />
+                <ScalarProperty Name="ref_shift_id" ColumnName="ref_shift_id" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="required_hour" ColumnName="required_hour" />
+                <ScalarProperty Name="rest_day" ColumnName="rest_day" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ref_sss">
+            <EntityTypeMapping TypeName="PayrollDBModel.ref_sss">
+              <MappingFragment StoreEntitySet="ref_sss">
+                <ScalarProperty Name="ref_sss_id" ColumnName="ref_sss_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="salary_from" ColumnName="salary_from" />
+                <ScalarProperty Name="salary_to" ColumnName="salary_to" />
+                <ScalarProperty Name="employee_share" ColumnName="employee_share" />
+                <ScalarProperty Name="employer_share" ColumnName="employer_share" />
+                <ScalarProperty Name="total_contribution" ColumnName="total_contribution" />
+                <ScalarProperty Name="date_deleted" ColumnName="date_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PayrollDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timesheet_log">
+            <EntityTypeMapping TypeName="PayrollDBModel.timesheet_log">
+              <MappingFragment StoreEntitySet="timesheet_log">
+                <ScalarProperty Name="timesheet_log_id" ColumnName="timesheet_log_id" />
+                <ScalarProperty Name="employee_serial" ColumnName="employee_serial" />
+                <ScalarProperty Name="datetime_in" ColumnName="datetime_in" />
+                <ScalarProperty Name="datetime_out" ColumnName="datetime_out" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

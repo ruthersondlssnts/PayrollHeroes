@@ -1,0 +1,14 @@
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\bin\Debug\netcoreapp2.1\Payroll.Service.deps.json
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\bin\Debug\netcoreapp2.1\Payroll.Service.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\bin\Debug\netcoreapp2.1\Payroll.Service.pdb
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\bin\Debug\netcoreapp2.1\Payroll.Core.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\bin\Debug\netcoreapp2.1\Payroll.Infrastructure.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\bin\Debug\netcoreapp2.1\Payroll.Infrastructure.pdb
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\bin\Debug\netcoreapp2.1\Payroll.Core.pdb
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\obj\Debug\netcoreapp2.1\Payroll.Service.csprojAssemblyReference.cache
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\obj\Debug\netcoreapp2.1\Payroll.Service.AssemblyInfoInputs.cache
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\obj\Debug\netcoreapp2.1\Payroll.Service.AssemblyInfo.cs
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\obj\Debug\netcoreapp2.1\Payroll.Service.csproj.CoreCompileInputs.cache
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\obj\Debug\netcoreapp2.1\Payroll.Service.csproj.CopyComplete
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\obj\Debug\netcoreapp2.1\Payroll.Service.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Service\obj\Debug\netcoreapp2.1\Payroll.Service.pdb

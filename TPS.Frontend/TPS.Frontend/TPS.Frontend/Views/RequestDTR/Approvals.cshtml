@@ -1,0 +1,163 @@
+﻿@{
+    ViewData["Title"] = "DTR Approvals";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table id="apprvdtrtable" class="table table-bordered table-striped dt-responsive nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th data-priority="1">Date</th>
+                                        <th data-priority="2">Name</th>
+                                        <th data-priority="3">Dept</th>
+                                        <th>Time in</th>
+                                        <th>Time out</th>
+                                        <th>Remarks</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+<!-- /.modal -->
+<div class="modal fade" id="form-modal" tabindex="-1" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+@section scripts {
+
+    <script>
+
+        function ModalAddEdit(url, title) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (res) {
+                    FormShow(res, null, title)
+                }
+            });
+        }
+
+        function jQueryAjaxPost(form) {
+            try {
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        if (res.isValid) {
+                            FormHide();
+                            isSuccessPost = true;
+                            AlertSuccess()
+                        }
+                        else {
+                            FormShow(res.html, res.error);
+                            isSuccessPost = false;
+                        }
+
+                    },
+                    error: function (err) {
+                        isSuccessPost = false;
+                        AlertError()
+                        FormHide();
+                        console.log(err)
+                    }
+                }).done(function () {
+                    //unobstrusive validation
+                    $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                    $.validator.unobtrusive.parse("form");
+                });
+                //to prevent default form submit event
+                return false;
+            } catch (ex) {
+                isSuccessPost = false;
+                FormHide();
+                AlertError()
+                console.log(ex)
+            }
+        }
+
+        var apprvDtrAjaxTable = $("#apprvdtrtable").DataTable({
+            ajax: {
+                url: "/RequestDTR/GetDTRApprovals",
+                type: "POST",
+                datatype: "json"
+            },
+            columnDefs: [
+                {   targets: '_all', defaultContent: '-' },
+                { targets: 0, className: 'dtr-control', orderable: false, width: 10 }
+            ],
+            columns: [
+                { defaultContent: "" },
+                {
+                    data: "shiftDate", autoWidth: true, render: function (data, type, row) {
+                        return EditLink('@Url.Action("ProcessApproval", "RequestDTR")/' + row.id + '', 'Approval DTR', moment(data).format("ll"));
+                    }
+                },
+                {   render: function (data, type, row) {return row.firstName + " " + row.lastName;}},
+                {   data: "groupName", autoWidth: true},
+                {   data: "actualIn", autoWidth: true, render: function (data) { return moment(data).format("LT");}},
+                {   data: "actualOut", autoWidth: true, render: function (data) { return moment(data).format("LT");} },
+                {   data: "remarks", autoWidth: true },
+                {   data: "approvalStatusName", autoWidth: true },
+            ],
+            order: [1, "asc"],
+            filter: true,
+            processing: "true",
+            language: {
+                "processing": "Processing... Please wait"
+            }
+        });
+
+        $(document).ready(function () {
+            DeleteNotifications(1);
+
+            apprvDtrAjaxTable.ajax.reload(null, false);
+
+            //refresh grid after submit
+            $('#form-modal').on('hidden.bs.modal', function () {
+                if (isSuccessPost) {
+                    apprvDtrAjaxTable.ajax.reload(null, false);
+                    isSuccessPost = false;
+                }
+            })
+
+        });
+
+    </script>
+
+}

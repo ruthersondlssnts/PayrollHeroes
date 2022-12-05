@@ -1,0 +1,170 @@
+﻿@*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>*@
+@*@using System.Security.Claims;*@
+<script>
+    @*const connection = new signalR.HubConnectionBuilder()
+        .withUrl("http://localhost:5000/notifyhub")
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+    async function start() {
+        try {
+            await connection.start();
+            console.log("SignalR Connected.");
+        } catch (err) {
+            console.log(err);
+            //setTimeout(start, 5000);
+        }
+    };
+
+    connection.onclose(start);
+
+    start().then(function () {
+        connection.invoke("JoinGroup", "@User.FindFirst(ClaimTypes.NameIdentifier).Value").catch(function (err) {
+            return console.error(err.toString());
+        });
+        connection.invoke("SendMessage", "@User.FindFirst(ClaimTypes.NameIdentifier).Value", "message").catch(function (err) {
+            return console.error(err.toString());
+        });
+    });
+
+    connection.on("ReceiveMessage", function (message) {
+        var notifCount= parseInt($("#notifbell").text())
+        if ($.isNumeric(notifCount))
+            $("#notifcount").text(notifCount++)
+        else
+            $("#notifcount").text('1')
+
+        $(document).Toasts('create', {
+            title: 'New Notif',
+            position: 'bottomLeft',
+            body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+            autohide: true,
+            delay: 5000,
+        })
+    });*@
+
+    $("#notifbell").click(function () {
+        $("#notifcontent").empty();
+        $.ajax({
+            url: "/UserNotification/GetAllUserNotifications",
+            type: "get",
+            success: function (result) {
+                var res = result.result;
+                if (res.length == 0) {
+                    $(".dropdown-header").text(res.length + " Notification")
+                }
+                else {
+                    if (res.length == 1)
+                        $(".dropdown-header").text("1 Notification")
+                    else
+                        $(".dropdown-header").text(res.length + " Notifications")
+
+                    $.each(res, function (i, item) {
+                        var link;
+                        var title;
+                        var body;
+                        var color = item.isRead == true ? "text-default" : "text-primary"
+
+                        switch (item.type) {
+                            case 1:
+                                link = "/RequestDTR/Approvals";
+                                body = "<b>" + item.fullName + "</b> has sent you DTR request "
+                                break;
+                            case 2:
+                                link = "/RequestDTR/Index";
+                                body = "Your DTR request has been " + item.status +"<br><b>Approver: </b>"+item.fullName
+                                break;
+                            case 3:
+                                link = "/RequestOvertime/Approvals";
+                                body = "<b>" + item.fullName + "</b> has sent you Overtime request "
+                                break;
+                            case 4:
+                                link = "/RequestOvertime/Index";
+                                body = "Your Overtime request has been " + item.status + "<br><b>Approver: </b>" + item.fullName
+                                break;
+                            case 5:
+                                link = "/RequestLeave/Approvals";
+                                body = "<b>" + item.fullName + "</b> has sent you Leave request "
+                                break;
+                            case 6:
+                                link = "/RequestLeave/Index";
+                                body = "Your Leave request has been " + item.status + "<br><b>Approver: </b>" + item.fullName
+                                break;
+                            default:
+                        }
+
+                        switch (item.type) {
+                            case 1:
+                            case 3:
+                            case 5:
+                                title = "New Request"
+                                break;
+                            case 2:
+                            case 4:
+                            case 6:
+                                title = "Approval Update"
+                                break;
+                            default:
+                        }
+
+
+                        $("#notifcontent").append(`<div class="dropdown-divider"></div>
+                            <a href="`+link+`" class="dropdown-item">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title">
+                                            `+ title + `<span class="float-right text-sm `+color+`"><i class="fas fa-circle"></i></span>
+                                        </h3>
+                                        <p class="text-sm">`+ body + `</p>
+                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>`+ moment(item.dateTime).fromNow() + `</p>
+                                    </div>
+                                </div>
+                        </a>`);
+                    });
+
+                }
+
+
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+        $.ajax({
+            type: 'POST',
+            url: "/UserNotification/UpdateAllToRead",
+            success: function () {
+                $("#notifcount").text("")
+            }
+        })
+    });
+    function DeleteNotifications(type) {
+        $.ajax({
+            type: 'POST',
+            url: "/UserNotification/DeleteByType",
+            data: {type:type},
+            error: function (result) {
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/UserNotification/GetUnreadUserNotifications",
+            type: "get",
+            success: function (result) {
+                var res = result.result;
+                if (res.length != 0) {
+                    $("#notifcount").text(res.length)
+                }
+                else {
+                    $("#notifcount").text("")
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+    });
+
+</script>

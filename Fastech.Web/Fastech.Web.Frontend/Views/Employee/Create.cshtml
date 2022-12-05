@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Employee Page";
+}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Create Employee</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Employee No.</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Employee No.">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Name</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Date Hired</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Date Hired">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Group Description</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Group Description">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Department</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Department">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Position</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Position">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Supervisor</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Supervisor">
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Manager</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Manager">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Birthdate</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Birthdate">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Gender</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Gender">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Civil Status</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Civil Status">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Present Address</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Present Address">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Permanent Address</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Permanent Address">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Cluster</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Cluster">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a asp-controller="Employee" asp-action="Index" class="btn btn-default float-right">Back To Index</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

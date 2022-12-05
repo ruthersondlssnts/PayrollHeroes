@@ -1,0 +1,307 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Calendar";
+
+}
+@Html.AntiForgeryToken()
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-body p-0">
+                                <!-- THE CALENDAR -->
+                                <div id="calendar"></div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="sticky-top mb-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Legend</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- the events -->
+                                    <div id="external-events">
+                                        <div class="external-event bg-success">Approved</div>
+                                        <div class="external-event bg-warning">For Approval</div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Leave Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="main">
+
+                    <input type="hidden" id="request_leave_id" />
+                    <div class="form-group">
+                        <label for="Name">Name</label>
+                        <input type="text" class="form-control" id="name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Date</label>
+                        <input type="text" class="form-control" id="leave_date" placeholder="Date" />
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="custom-select" id="ref_leave_type_id"></select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Name">Reason</label>
+                        <input type="text" class="form-control" id="reason" placeholder="Reason" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Name">Approver Remarks</label>
+                        <input type="text" class="form-control" id="approver_remark" placeholder="Approver Remarks" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnApprove" onclick="Process(true);">Approve</button>
+                <button type="button" class="btn btn-danger" id="btnDisapproved" onclick="Process(false);">Disapprove</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            Grid();
+            $('#leave_date').datepicker({
+                forceParse: false
+            });
+        });
+        function getbyIDApproval(id) {
+            GetLeaveType();
+            $('#request_leave_id').val('');
+            $('#leave_date').val('');
+
+            $('#leave_day').val('');
+            $('#reason').val('');
+            $('#leave_date').css('border-color', 'lightgrey');
+            $('#leave_day').css('border-color', 'lightgrey');
+            $('#reason').css('border-color', 'lightgrey');
+            $('#approver_remark').val('');
+            $('#ref_leave_type_id option:first').prop('selected', true);
+
+            $('#leave_date').prop('disabled', true);
+            $('#name').prop('disabled', true);
+            $('#reason').prop('disabled', true);
+            $('#ref_leave_type_id').prop('disabled', true);
+
+            $('#btnApprove').hide();
+            $('#btnDisapproved').hide();
+            var route = '@Url.Action("GetByID", "RequestLeave")';
+            if (id != null) {
+                $.ajax({
+
+                    url: route + '/' + id,
+                    typr: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: function (result) {
+                        var d = result.leave_date.slice(0, 10).split('-');
+                        var val = d[1] + '/' + d[2] + '/' + d[0];
+                        $('#request_leave_id').val(result.request_leave_id);
+                        $('#leave_date').val(val);
+                        $('#ref_leave_type_id').val(result.ref_leave_type_id);
+                        $('#leave_day').val(result.leave_day);
+                        $('#reason').val(result.reason);
+                        $('#name').val(result.employee_.last_name + ', ' + result.employee_.first_name);
+                        if (result.ref_status_id == 1) {
+                            $('#btnApprove').show();
+                            $('#btnDisapproved').show();
+                        }
+                        $('#myModal').modal('show');
+                    },
+                    error: function (errormessage) {
+                        swal_error(errormessage);
+                    }
+                });
+            } else {
+                $('#myModal').modal('show');
+            }
+        }
+        function Process(bool) {
+            var res = validateremarks();
+            if (res == false) {
+                return false;
+            }
+
+            var routes = '@Url.Action("Approve", "RequestLeave")';
+
+            if (bool == false) {
+                routes = '@Url.Action("Disapprove", "RequestLeave")';
+            }
+            var dataObject = JSON.stringify({
+                'request_leave_id': $('#request_leave_id').val(),
+                'leave_date': $('#leave_date').val(),
+                'ref_leave_type_id': $('#ref_leave_type_id').val(),
+                'leave_day': 1,
+                'ref_department_id': $('#ref_department_id').val(),
+                'reason': $('#reason').val(),
+                'ref_status_id': 1,
+                'approver_id': '',
+                'approver_date': '',
+                'approver_remark': $('#approver_remark').val(),
+                'date_deleted': ''
+            });
+            swal_wait();
+            $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: routes,
+                data: dataObject,
+
+                success: function (data) {
+                    $('#myModal').modal('hide');
+                    Swal.hideLoading();
+                    swal_success();
+                    $('#calendar').fullCalendar('removeEvents');
+                    $('#calendar').fullCalendar('refetchEvents');
+                },
+                error: function (errormessage) {
+                    Swal.hideLoading();
+                    swal_error();
+                }
+            });
+        }
+        function Grid() {
+            $('#calendar').fullCalendar({
+                plugins: ['bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
+                header:
+                {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                buttonText: {
+                    today: 'today',
+                    month: 'month',
+                    week: 'week',
+                    day: 'day'
+                },
+
+                events: function (start, end, timezone, callback) {
+                    $.ajax({
+                        url: 'GetData',
+                        type: "GET",
+                        dataType: "JSON",
+
+                        success: function (result) {
+                            var events = [];
+
+                            $.each(result, function (i, data) {
+                                var bgcol = '';
+                                var fontcol = '';
+                                if (data.ref_status_id == 1) {
+                                    bgcol = 'orange';
+                                    fontcol = 'black'
+                                }
+                                if (data.ref_status_id == 2) {
+                                    bgcol = 'green';
+                                    fontcol = 'white'
+                                }
+                                if (data.ref_status_id == 0) {
+                                    bgcol = 'blue';
+                                    fontcol = 'white'
+                                }
+                                events.push(
+                                    {
+                                        title: '(' + data.ref_leave_type_code + ')' + data.name,
+                                        start: moment(data.dtStart).format('YYYY-MM-DD'),
+                                        end: moment(data.dtEnd).format('YYYY-MM-DD'),
+                                        backgroundColor: bgcol, //Blue
+                                        borderColor: 'white', //Blue
+                                        textColor: fontcol,
+                                        description: data.reason,
+                                        id: data.id
+                                    });
+                            });
+
+                            callback(events);
+                        }
+                    });
+                },
+
+                eventRender: function (event, element) {
+                    element.qtip(
+                        {
+                            content: event.description,
+                            position: {
+                                my: 'center left',  // Position my top left...
+                                at: 'center right', // at the bottom right of...
+                            }
+                        });
+                },
+                eventClick: function (event, jsEvent, view) {
+                    if (event.id != 0) {
+                        getbyIDApproval(event.id);
+                        $('#fullCalModal').modal();
+                    }
+                },
+                editable: true,
+            });
+        }
+
+        
+        function GetLeaveType() {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetLeaveType", "RequestLeave")',
+                data: "{}",
+                success: function (data) {
+                    var s = '';
+                    for (var i = 0; i < data.length; i++) {
+                        s += '<option value="' + data[i].ref_leave_type_id + '">' + data[i].ref_leave_type_name + '</option>';
+                    }
+                    $("#ref_leave_type_id").html(s);
+                }
+            });
+        }
+
+
+        function validateremarks() {
+            var isValid = true;
+            if ($('#approver_remark').val().trim() == "") {
+                $('#approver_remark').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#approver_remark').css('border-color', 'lightgrey');
+            }
+
+            return isValid;
+        }
+    </script>
+}

@@ -1,0 +1,48 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Overtime Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="main">
+
+                    <input type="hidden" id="request_overtime_id" />
+                    <div class="form-group">
+                        <label for="Name">Date</label>
+                        <input type="text" class="form-control" id="overtime_date" placeholder="Date" />
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="custom-select" id="ref_overtime_type_id">
+                            <option value="1">WITHPAY</option>
+                            <option value="2">BANK</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Time In</label>
+                        <input type="text" class="form-control" id="time_in" placeholder="In" maxlength="5" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Age">Time Out</label>
+                        <input type="text" class="form-control" id="time_out" placeholder="Out" maxlength="5" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Reason</label>
+                        <input type="text" class="form-control" id="reason" placeholder="Reason" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Approver Remark</label>
+                        <input type="text" class="form-control" id="approver_remark" placeholder="Approver Remark" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnApprove" onclick="Process(true);">Approve</button>
+                <button type="button" class="btn btn-danger" id="btnDisapproved" onclick="Process(false);">Disapprove</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

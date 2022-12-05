@@ -1,0 +1,199 @@
+﻿<!--<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Search</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">-->
+<!-- select -->
+<!--<div class="form-group">
+                    <label>Cutoff</label>
+                    <select class="custom-select" id="cutoff"></select>
+                </div>
+
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Company</label>
+                    <select class="custom-select" id="company"></select>
+                </div>
+                <div class="form-group">
+                    <label>Branch</label>
+                    <select class="custom-select" id="branch"></select>
+                </div>
+                <div class="form-group">
+                    <label>Department</label>
+                    <select class="custom-select" id="department"></select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="button" class="btn btn-block btn-default" id="search" onclick="return search()">Search</button>
+                </div>
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="button" class="btn btn-block btn-default" id="export" onclick="return exportdtr()">Export</button>
+                </div>
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Employee DTR</h3>
+    </div>-->
+<!-- /.card-header -->
+<!--<div class="card-body">
+    <div id="jsGrid1"></div>
+</div>-->
+<!-- /.card-body -->
+<!--</div>
+    </div>
+</div>-->
+<!-- /.row -->
+<!--</div>--><!-- /.container-fluid -->
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Search</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <!-- select -->
+                            <div class="form-group">
+                                <label>Cutoff</label>
+                                <select class="custom-select" id="cutoff"><option value="4">01/16/2020 - 01/31/2020</option></select>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3" data-select2-id="8">
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select class="custom-select select2-hidden-accessible" id="company" data-select2-id="company" tabindex="-1" aria-hidden="true">
+                                    <option value="0" data-select2-id="2">-- ALL --</option>
+                                    <option value="2" selected data-select2-id="9">Company 1</option>
+                                    <option value="3" data-select2-id="10">Company 2</option>
+                                    <option value="4" data-select2-id="11">Company 3</option>
+                                    <option value="11" data-select2-id="12">Company 4</option>
+                                    <option value="12" data-select2-id="13">Company 5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Branch</label>
+                                <select class="custom-select select2-hidden-accessible" id="branch" tabindex="-1" aria-hidden="true" data-select2-id="branch">
+                                    <option value="0" data-select2-id="22">-- ALL --</option>
+                                    <option value="5" selected data-select2-id="27">C1 Branch 1</option>
+                                    <option value="6" data-select2-id="28">C1 Branch 2</option>
+                                    <option value="7" data-select2-id="29">C1 Branch 3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select class="custom-select select2-hidden-accessible" id="department" tabindex="-1" aria-hidden="true" data-select2-id="department">
+                                    <option value="0" data-select2-id="36">-- ALL --</option>
+                                    <option value="8" selected data-select2-id="38">B1 HR Department</option>
+                                    <option value="9" data-select2-id="39">B1 IT Department</option>
+                                    <option value="10" data-select2-id="40">B1 TTTT Department</option>
+                                    <option value="14" data-select2-id="41">Charlie Dept</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Employee</label>
+                                <select class="custom-select select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                    <option value="0" data-select2-id="36">Select Employee</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn btn-block btn-primary" id="search" onclick="return search()"><i class="fas fa-search"></i> Search</button>
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn btn-block btn-success" id="export" onclick="return exportdtr()"><i class="fas fa-file-export"></i> Export</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Employee DTR</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="jsGrid1" class="jsgrid" style="position: relative; height: auto; width: 100%;">
+                        <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                            <table class="jsgrid-table">
+                                <tr class="jsgrid-header-row"><th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 50px;">Name</th><th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 30px;">Date</th><th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 20px;">Day</th><th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 40px;">Shift</th><th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 30px;">Type</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">RqHr</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">RdHr</th><th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 20px;">In</th><th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 20px;">Out</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">OtIn</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">OTOut</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">Late</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">UT</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">OT</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">OT8</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">ND</th><th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">AB</th></tr>
+                                <tr class="jsgrid-filter-row" style="display: none;"><td class="jsgrid-cell" style="width: 50px;"><input type="text"></td><td class="jsgrid-cell" style="width: 30px;"><input type="text"></td><td class="jsgrid-cell" style="width: 20px;"><input type="text"></td><td class="jsgrid-cell" style="width: 40px;"></td><td class="jsgrid-cell" style="width: 30px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell" style="width: 20px;"><input type="text"></td><td class="jsgrid-cell" style="width: 20px;"><input type="text"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td></tr>
+                                <tr class="jsgrid-insert-row" style="display: none;"><td class="jsgrid-cell" style="width: 50px;"><input type="text"></td><td class="jsgrid-cell" style="width: 30px;"><input type="text"></td><td class="jsgrid-cell" style="width: 20px;"><input type="text"></td><td class="jsgrid-cell" style="width: 40px;"></td><td class="jsgrid-cell" style="width: 30px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell" style="width: 20px;"><input type="text"></td><td class="jsgrid-cell" style="width: 20px;"><input type="text"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><input type="number"></td></tr>
+                            </table>
+                        </div><div class="jsgrid-grid-body">
+                            <table class="jsgrid-table">
+                                <tbody>
+                                    <tr class="jsgrid-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/16/2020</a></td><td class="jsgrid-cell" style="width: 20px;">THU</td><td class="jsgrid-cell" style="width: 40px;">8PM-5AM</td><td class="jsgrid-cell" style="width: 30px;">RWD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell" style="width: 20px;">20:00</td><td class="jsgrid-cell" style="width: 20px;">29:00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">22:00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">30:00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">7.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-alt-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/17/2020</a></td><td class="jsgrid-cell" style="width: 20px;">FRI</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RWD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">8.73</td><td class="jsgrid-cell" style="width: 20px;">12:16</td><td class="jsgrid-cell" style="width: 20px;">22:00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><span style="color: red;">0.27</span></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/18/2020</a></td><td class="jsgrid-cell" style="width: 20px;">SAT</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell" style="width: 20px;"></td><td class="jsgrid-cell" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-alt-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/19/2020</a></td><td class="jsgrid-cell" style="width: 20px;">SUN</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell" style="width: 20px;"></td><td class="jsgrid-cell" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/20/2020</a></td><td class="jsgrid-cell" style="width: 20px;">MON</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RWD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">8.83</td><td class="jsgrid-cell" style="width: 20px;">12:10</td><td class="jsgrid-cell" style="width: 20px;">22:00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"><span style="color: red;">0.17</span></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-alt-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/21/2020</a></td><td class="jsgrid-cell" style="width: 20px;">TUE</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RWD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell" style="width: 20px;">08:00</td><td class="jsgrid-cell" style="width: 20px;">22:15</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/22/2020</a></td><td class="jsgrid-cell" style="width: 20px;">WED</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RWD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell" style="width: 20px;">08:00</td><td class="jsgrid-cell" style="width: 20px;">22:04</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-alt-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/23/2020</a></td><td class="jsgrid-cell" style="width: 20px;">THU</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RWD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell" style="width: 20px;">11:57</td><td class="jsgrid-cell" style="width: 20px;">22:20</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/24/2020</a></td><td class="jsgrid-cell" style="width: 20px;">FRI</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RWD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">9.00</td><td class="jsgrid-cell" style="width: 20px;">12:00</td><td class="jsgrid-cell" style="width: 20px;">22:18</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                    <tr class="jsgrid-alt-row"><td class="jsgrid-cell" style="width: 50px;">Anne Maureen M. Pante</td><td class="jsgrid-cell" style="width: 30px;"><a href="#" onclick="return getbyID(0)">01/25/2020</a></td><td class="jsgrid-cell" style="width: 20px;">SAT</td><td class="jsgrid-cell" style="width: 40px;">12PM-10PM</td><td class="jsgrid-cell" style="width: 30px;">RD</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell" style="width: 20px;"></td><td class="jsgrid-cell" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;"></td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td><td class="jsgrid-cell jsgrid-align-right" style="width: 20px;">0.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item "><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item "><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="col-md-6" style="padding-top: 10px;">
+                            <span style="float:right" id="total-entries">
+                                Showing 1 to 5 of 100 entries
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.container-fluid -->

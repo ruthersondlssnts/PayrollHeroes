@@ -1,0 +1,30 @@
+﻿@model TPS.Frontend.Infrastructure.GroupApprover
+@{
+    Layout = null;
+}
+<form asp-action="AddApprover" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+    <input type="hidden" asp-for="GroupId" value="@Model.GroupId" />
+    <input type="hidden" asp-for="ApproverUserId" value="" />
+    <input type="hidden" asp-for="Type" value="@Model.Type" />
+
+    <div class="form-group">
+        <label for="ApproverName">Approver Name</label>
+        <input type="text" class="col-md-12 form-control typeahead" asp-for="ApproverName" placeholder="Search names..." />
+    </div>
+    <div class="form-group">
+        <label for="ApproverOrder">Approver Order</label>
+        <input type="number" class="col-md-12 form-control" asp-for="ApproverOrder" />
+    </div>
+
+    <div class="form-group">
+        <div class="form-check">
+            <input type="checkbox" asp-for="RequiredApproval" class="form-check-input" />
+            <label class="form-check-label">Required Approval</label>
+        </div>
+    </div>
+
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>

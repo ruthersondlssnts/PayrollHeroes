@@ -1,0 +1,213 @@
+﻿@{
+    ViewData["Title"] = "Payroll Cutoffs";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-block btn-primary" id="process" onclick="ModalAddEdit('@Url.Action("AddOrEdit","RefPayrollCutOff",null,Context.Request.Scheme)','Payroll CutOff Information')"><i class="fas fa-plus"></i> Create</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="cutofftable" class="table table-bordered table-striped dt-responsive nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th data-priority="1">Cutoff Name</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th>Processed</th>
+                                    <th>Government</th>
+                                    <th data-priority="2">Action</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.card-body -->
+
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<!-- /.modal -->
+<div class="modal fade" id="form-modal" tabindex="-1" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+@section scripts {
+
+    <script>
+        function FormSetup() {
+            $('#date-cutoffstart').datetimepicker({
+                format: 'L',
+            });
+            $('#date-cutoffend').datetimepicker({
+                format: 'L',
+            });
+
+        }
+        function ModalAddEdit(url, title) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (res) {
+                    FormShow(res,null,title);
+                    FormSetup();
+                }
+            });
+        }
+
+        function jQueryAjaxDelete (form) {
+            Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                        try {
+                            $.ajax({
+                                type: 'POST',
+                                url: form.action,
+                                data: new FormData(form),
+                                contentType: false,
+                                processData: false,
+                                success: function (result) {
+                                    cutoffAjaxTable.ajax.reload(null, false);
+                                    AlertDeleted();
+                                },
+                                error: function (result) {
+                                    AlertError();
+                                }
+                            });
+                        } catch (ex) {
+                            AlertError();
+                            console.log(ex)
+                        }
+
+                    }
+            })
+                //prevent default form submit event
+            return false;
+        }
+
+        function jQueryAjaxPost(form) {
+            try {
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        if (res.isValid) {
+                            FormHide();
+                            isSuccessPost = true;
+                            AlertSuccess()
+                        }
+                        else {
+                            FormShow(res.html, res.error);
+                            isSuccessPost = false;
+                            FormSetup();
+                        }
+                    },
+                    error: function (err) {
+                        isSuccessPost = false;
+                        console.log(err)
+                        FormHide();
+                        AlertError();
+                    }
+                }).done(function () {
+                    //unobstrusive validation
+                    $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                    $.validator.unobtrusive.parse("form");
+                });
+                //to prevent default form submit event
+                return false;
+            } catch (ex) {
+                isSuccessPost = false;
+                FormHide();
+                AlertError()
+                console.log(ex)
+            }
+         }
+
+        var cutoffAjaxTable = $("#cutofftable").DataTable({
+                ajax: {
+                url: "/RefPayrollCutoff/GetPayrollCutoffs",
+                    type: "POST",
+                    datatype: "json"
+                },
+                columnDefs: [
+                    {   targets: '_all', defaultContent: '-' },
+                    { targets: 0, className: 'dtr-control', orderable: false }
+                ],
+                columns: [
+                    {   defaultContent: ""  },
+                    {
+                        data: "name", autoWidth: true, render: function (data, type, row) {
+                            return EditLink('@Url.Action("AddOrEdit", "RefPayrollCutoff")/'+row.id+'','Payroll Cutoff Information',data);
+                        }
+                    },
+                    {   data: "cutoffStartDate", autoWidth: true, render: function (data) { return moment(data).format("ll"); } },
+                    {   data: "cutoffEndDate", autoWidth: true, render: function (data) { return moment(data).format("ll"); } },
+                    {   data: "isProcessed",  autoWidth: true,render: table_checkbox },
+                    {   data: "isProcessGovernment", autoWidth: true, render: table_checkbox },
+                    {
+                        render: function (data, type, row) {
+                            return DeleteLink('@Url.Action("Delete", "RefPayrollCutoff")/'+row.id+'');
+                        }
+                    },
+                ],
+                order: [1, "asc"],
+                filter: true,
+                processing: "true",
+                language: {
+                    "processing": "Processing... Please wait"
+                }
+            });
+
+        $(document).ready(function () {
+
+
+            //refresh grid after submit
+            $('#form-modal').on('hidden.bs.modal', function () {
+                if (isSuccessPost) {
+                    cutoffAjaxTable.ajax.reload(null, false);
+                    isSuccessPost = false;
+                }
+            })
+
+        });
+
+    </script>
+
+}
+

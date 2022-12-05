@@ -1,0 +1,230 @@
+﻿@model TPS.Frontend.Infrastructure.RefShift
+@{
+    Layout = null;
+}
+<div class="alert alert-danger" role="alert" id="error-summary">
+</div>
+@{
+    if (Model.RefShiftDetails == null)
+    {
+        Model.RefShiftDetails = new List<TPS.Frontend.Infrastructure.RefShiftDetails>
+{
+            new TPS.Frontend.Infrastructure.RefShiftDetails{ Day ="MON",IsRestDay = false, RequiredHour =9.0M },
+            new TPS.Frontend.Infrastructure.RefShiftDetails{ Day ="TUE",IsRestDay = false, RequiredHour =9.0M },
+            new TPS.Frontend.Infrastructure.RefShiftDetails{ Day ="WED",IsRestDay = false, RequiredHour =9.0M },
+            new TPS.Frontend.Infrastructure.RefShiftDetails{ Day ="THU",IsRestDay = false, RequiredHour =9.0M },
+            new TPS.Frontend.Infrastructure.RefShiftDetails{ Day ="FRI",IsRestDay = false, RequiredHour =9.0M },
+            new TPS.Frontend.Infrastructure.RefShiftDetails{ Day ="SAT",IsRestDay = true, RequiredHour =0.0M },
+            new TPS.Frontend.Infrastructure.RefShiftDetails{ Day ="SUN",IsRestDay = true, RequiredHour =0.0M}
+        };
+    }
+
+}
+<div class="bs-stepper" id="stepper">
+    <div class="bs-stepper-header" role="tablist">
+        <!-- your steps here -->
+        <div class="step" data-target="#shift-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="shift-part" id="shift-part-trigger">
+                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label">Shift</span>
+            </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#sched-part">
+            <button type="button" class="step-trigger" role="tab" aria-controls="sched-part" id="sched-part-trigger">
+                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label">Schedule</span>
+            </button>
+        </div>
+
+
+    </div>
+    <div class="bs-stepper-content">
+        <!-- your steps content here -->
+        <form asp-action="AddOrEdit" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <input type="hidden" asp-for="CreateDate" />
+            <input type="hidden" asp-for="ShiftIn" />
+            <input type="hidden" asp-for="ShiftOut" />
+            <input type="hidden" asp-for="BreakIn" />
+            <input type="hidden" asp-for="BreakOut" />
+            <input type="hidden" asp-for="NDStart" />
+            <input type="hidden" asp-for="NDEnd" />
+
+            <div id="shift-part" class="content" role="tabpanel" aria-labelledby="shift-part-trigger">
+
+                <div class="form-group">
+                    <label for="Name">Shift</label>
+                    <input type="text" class="form-control " asp-for="ShiftName" placeholder="Shift" />
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group" data-target="#time-timein" data-toggle="datetimepicker">
+                            <label for="ShiftIn">Time In</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input id="time-timein" type="text" class="form-control datetimepicker-input" placeholder="Time In" />
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" data-target="#time-timeout" data-toggle="datetimepicker">
+                            <label for="ShiftOut">Time Out</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input type="text" id="time-timeout" class="form-control datetimepicker-input" placeholder="Time Out" maxlength="5" />
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" data-target="#time-breakin" data-toggle="datetimepicker">
+                            <label for="BreakIn">Break In</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input type="text" id="time-breakin" class="form-control datetimepicker-input" placeholder="Break In" maxlength="5" />
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" data-target="#time-breakout" data-toggle="datetimepicker">
+                            <label for="BreakOut">Break Out</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input type="text" id="time-breakout" class="form-control datetimepicker-input" placeholder="Brea Out" maxlength="5" />
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" data-target="#time-ndstart" data-toggle="datetimepicker">
+                            <label for="NDStart">NS Start</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input type="text" id="time-ndstart" class="form-control datetimepicker-input" placeholder="Night shift start" maxlength="5" />
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" data-target="#time-ndend" data-toggle="datetimepicker">
+                            <label for="NDEnd">NS End</label>
+                            <div class="input-group date" data-target-input="nearest">
+                                <input type="text" id="time-ndend" class="form-control datetimepicker-input" placeholder="Night shift end" maxlength="5" />
+                                <div class="input-group-append">
+                                    <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="GracePeriod">Grace Period</label>
+                    <input type="text" class="form-control" asp-for="GracePeriod" placeholder="Grace Period" maxlength="5" />
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" asp-for="IncludeGracePeriod" />
+                        <label class="form-check-label" asp-for="IncludeGracePeriod">Include Grace Period In Late</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+
+                        <input type="checkbox" class="form-check-input" asp-for="IsAutoOvertime" />
+                        <label class="form-check-label" asp-for="IsAutoOvertime">Auto Compute Overtime</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+
+                        <input type="checkbox" class="form-check-input" asp-for="IsNightDiff" />
+                        <label class="form-check-label" asp-for="IsNightDiff">Enable Night Shift</label>
+                    </div>
+                </div>
+
+
+                <a class="btn btn-primary" onclick="stepper.next()">Next</a>
+            </div>
+
+
+            <div id="sched-part" class="content" role="tabpanel" aria-labelledby="sched-part-trigger">
+
+                <div class="form-group" id="chkbx">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th style="width:50%">Work Day</th>
+                                <th style="width:50%">Required Hr.</th>
+                            </tr>
+                            @for (int i = 0; i < Model.RefShiftDetails.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            @Model.RefShiftDetails[i].Day
+                                            <input type="hidden" asp-for="RefShiftDetails[i].IsRestDay" />
+                                            <input type="hidden" asp-for="RefShiftDetails[i].Day" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" min="0" max="24" maxlength="2" asp-for="RefShiftDetails[i].RequiredHour" width="5">
+                                    </td>
+                                </tr>
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <a class="btn btn-primary" onclick="stepper.previous()">Previous</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--<form id="main">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="hidden" id="ref_shift_id" />-->
+@*<div class="form-group row">
+        <label for="Shift" class="col-sm-2 col-form-label">Shift</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="shift_name" placeholder="Shift" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="Shift" class="col-sm-2 col-form-label">Time In</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="shift_in" placeholder="Shift In" maxlength="5" />
+        </div>
+    </div>*@
+
+<!--</div>
+            <div class="col-md-6">
+
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>-->

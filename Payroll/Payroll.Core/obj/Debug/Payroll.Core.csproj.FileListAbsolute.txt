@@ -1,0 +1,8 @@
+C:\Users\biboy\Source\repos\Payroll\Payroll.Core\bin\Debug\Payroll.Core.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Core\bin\Debug\Payroll.Core.pdb
+C:\Users\biboy\Source\repos\Payroll\Payroll.Core\bin\Debug\Microsoft.SqlServer.Types.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Core\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Core\obj\Debug\Payroll.Core.csproj.CoreCompileInputs.cache
+C:\Users\biboy\Source\repos\Payroll\Payroll.Core\obj\Debug\Payroll.Core.csproj.CopyComplete
+C:\Users\biboy\Source\repos\Payroll\Payroll.Core\obj\Debug\Payroll.Core.dll
+C:\Users\biboy\Source\repos\Payroll\Payroll.Core\obj\Debug\Payroll.Core.pdb

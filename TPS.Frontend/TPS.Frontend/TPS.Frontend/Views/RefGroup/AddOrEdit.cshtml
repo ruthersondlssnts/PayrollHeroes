@@ -1,0 +1,65 @@
+﻿@model TPS.Frontend.Infrastructure.RefGroup
+@{
+    Layout = null;
+}
+<div class="alert alert-danger" role="alert" id="error-summary">
+</div>
+<form asp-action="AddOrEdit" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <input type="hidden" asp-for="PathToNode" value="@Model.PathToNode" />
+    @for (int i = 0; i < Model.LeaveApprover.Count; i++)
+    {
+        <input type="hidden" asp-for="LeaveApprover[i].ApproverName" />
+        <input type="hidden" asp-for="LeaveApprover[i].ApproverOrder" />
+        <input type="hidden" asp-for="LeaveApprover[i].ApproverUserId" />
+        <input type="hidden" asp-for="LeaveApprover[i].RequiredApproval" />
+        <input type="hidden" asp-for="LeaveApprover[i].GroupId" />
+        <input type="hidden" asp-for="LeaveApprover[i].Type" />
+    }
+    @for (int i = 0; i < Model.OvertimeApprover.Count; i++)
+    {
+        <input type="hidden" asp-for="OvertimeApprover[i].ApproverName" />
+        <input type="hidden" asp-for="OvertimeApprover[i].ApproverOrder" />
+        <input type="hidden" asp-for="OvertimeApprover[i].ApproverUserId" />
+        <input type="hidden" asp-for="OvertimeApprover[i].RequiredApproval" />
+        <input type="hidden" asp-for="OvertimeApprover[i].GroupId" />
+        <input type="hidden" asp-for="OvertimeApprover[i].Type" />
+    }
+    @for (int i = 0; i < Model.DTRApprover.Count; i++)
+    {
+        <input type="hidden" asp-for="DTRApprover[i].ApproverName" />
+        <input type="hidden" asp-for="DTRApprover[i].ApproverOrder" />
+        <input type="hidden" asp-for="DTRApprover[i].ApproverUserId" />
+        <input type="hidden" asp-for="DTRApprover[i].RequiredApproval" />
+        <input type="hidden" asp-for="DTRApprover[i].GroupId" />
+        <input type="hidden" asp-for="OvertimeApprover[i].Type" />
+    }
+    <input type="hidden" asp-for="CreateDate" value="@Model.CreateDate" />
+
+
+    <div class="form-group">
+        <label for="GroupName">Group Name</label>
+        <input type="text" class="form-control" asp-for="GroupName" placeholder="Group Name" />
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" asp-for="RequiredApprover" />
+            <label class="form-check-label" asp-for="RequiredApprover">Approvers</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" asp-for="RequiredManager" />
+            <label class="form-check-label" asp-for="RequiredManager">Manager</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ManagerName">Manager Name</label>
+        <input type="text" class="form-control typeahead" asp-for="ManagerName" placeholder="Manager Name" />
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>

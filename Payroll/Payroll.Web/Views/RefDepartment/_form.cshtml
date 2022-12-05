@@ -1,0 +1,41 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Department Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="main">
+
+                    <input type="hidden" id="ref_department_id" />
+                    <div class="form-group">
+                        <label for="Name">Department</label>
+                        <input type="text" class="form-control" id="department_name" placeholder="Department" />
+                    </div>
+                    <div class="form-group">
+                        <label>Approver</label>
+                        <div class="row">
+                            <div class="col-9">
+                                <select class="custom-select" id="approver_list"></select>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" id="addapprover" class="form-control" onclick="Add();">ADD</button>
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+                    <div class="form-group">
+                        <div id="jsGrid2"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSave" style="display:none;" onclick="Update();">Save</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

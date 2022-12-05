@@ -1,0 +1,44 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Employee Overtime";
+
+}
+@Html.AntiForgeryToken()
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-block btn-default" id="process" onclick="return getbyID()">Request Overtime</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Overtime</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="jsGrid1"></div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+
+<partial name="_form" />
+
+@section scripts {
+
+    <script src="~/js/app/RequestOvertime/get.js"></script>
+    <script src="~/js/app/RequestOvertime/grid.js"></script>
+    <script src="~/js/app/RequestOvertime/update.js"></script>
+    <script src="~/js/app/RequestOvertime/validation.js"></script>
+    <script src="~/js/app/RequestOvertime/_initialize.js"></script>
+}

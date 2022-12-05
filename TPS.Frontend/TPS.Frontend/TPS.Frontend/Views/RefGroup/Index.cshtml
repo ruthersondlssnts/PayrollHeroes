@@ -1,0 +1,500 @@
+﻿@{
+    ViewData["Title"] = "Groups";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title" id="title">Company List</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-block btn-primary" id="addGroup" onclick="ModalAddEdit('@Url.Action("AddOrEdit","RefGroup",null,Context.Request.Scheme)','Branch Details')"><i class="fas fa-plus"></i> Create</button>
+                            <button type="button" class="btn btn-block btn-primary" style="display:none" onclick="ModalAddApprover('@Url.Action("AddApprover","RefGroup",null,Context.Request.Scheme)')" id="addApprover"><i class="fas fa-plus"></i> Create</button>
+                            <button type="button" class="btn btn-block btn-default" id="backBtn" style="display:none">Go Back</button>
+                            <button type="button" class="btn btn-block btn-default" id="backToGroups" style="display:none">Go Back</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive group">
+                        <table id="grouptable" class="table table-bordered table-striped dt-responsive nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th data-priority="1">Group Name</th>
+                                    <th>Manager</th>
+                                    <th>Approvers</th>
+                                    <th data-priority="2">Action</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <div class="table-responsive approver">
+                        <table id="approvertable" class="table table-bordered table-striped dt-responsive nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th data-priority="1">Order</th>
+                                    <th>Approver Name</th>
+                                    <th>Required</th>
+                                    <th data-priority="2">Action</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<!-- /.modal -->
+<div class="modal fade" id="form-modal" tabindex="-1" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="approver-modal" tabindex="-1" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Approver</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+@section scripts {
+
+    <script>
+        //show modal create group
+        function ModalAddEdit(url, title) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    pathToNode: pathToNodes[pathToNodes.length - 1]
+                },
+                success: function (res) {
+                    FormShow(res, null, title);
+                    AutoCompleteInitilize(true);
+                }
+            });
+        }
+
+        var approverNames = [];
+        //show modal create group approver
+        function ModalAddApprover(url) {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    groupId: group_id,
+                    type: type_approver
+                },
+                success: function (res) {
+                    $("#approver-modal .modal-body").html(res);
+                    $("#approver-modal").modal('show');
+
+                    AutoCompleteInitilize();
+                }
+            });
+        }
+
+        //auto complete names
+        function AutoCompleteInitilize(forManager) {
+            var $input = $(".typeahead");
+            GetEmployeesAjax().then(function (emps) {
+                //set auto complete after getting employee names
+                $input.typeahead({
+                    source: emps.filter(function (el) {
+                        console.log(el)
+                        if (forManager) {
+                            if (el.roles.indexOf("Manager")==-1) {
+                                return false;
+                            }
+                            else {
+                                return true;
+                            }
+                        }
+                        else {
+                            var isApprover = false;
+                            for (var i = 0; i < approverNames.length; i++) {
+                                if (approverNames[i] == el.fullName) {
+                                    isApprover = true;
+                                    break;
+                                }
+                                else
+                                    isApprover = false;
+                            }
+
+                            if (isApprover)
+                                return false;
+                            else
+                                return true;
+                        }
+
+                    }).map(function (row) {
+                        return { name: row.fullName, id: row.id }
+                    }),
+                    theme: "bootstrap4",
+                });
+            });
+
+            $input.change(function () {
+                var current = $input.typeahead("getActive");
+
+                if (current) {
+                    // Some item from your model is active!
+                    if (current.name.toLowerCase() == $input.val().toLowerCase()) {
+                        // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+                        $("#ApproverUserId").val(current.id);
+                        $("#ApproverName").val(current.name);
+                        setTimeout(function () {
+                            $("#ApproverOrder").focus();
+                        }, 1);
+
+                    } else {
+                        // This means it is only a partial match, you can either add a new item
+                        // or take the active if you don't want new items
+                        $("#ApproverName").val("");
+                        current = null;
+                        setTimeout(function () {
+                            $("#ApproverName").focus();
+                        }, 1);
+                    }
+                } else {
+                    $("#ApproverName").val("");
+                    setTimeout(function () {
+                        $("#ApproverName").focus();
+                    }, 1);
+                    // Nothing is active so it is a new value (or maybe empty value)
+                }
+            });
+        }
+
+        //delete group or approver
+        function jQueryAjaxDelete (form){
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    try {
+                        $.ajax({
+                            type: 'POST',
+                            url: form.action,
+                            data: new FormData(form),
+                            contentType: false,
+                            processData: false,
+                            success: function (result) {
+
+                                if (form.action.indexOf("DeleteApprover") >= 0)
+                                    approverAjaxTable(group_id, type_approver).ajax.reload(null, false);
+                                else
+                                    groupAjaxTable(pathToNodes[pathToNodes.length - 1], true).ajax.reload(null, false);
+
+                                AlertDeleted();
+
+                            },
+                            error: function (result) {
+                                AlertError();
+                            }
+                        });
+                    } catch (ex) {
+                        console.log(ex)
+                        AlertError();
+                    }
+
+                }
+            })
+
+
+            //prevent default form submit event
+            return false;
+        //show modal create group approver
+        }
+
+        //add edit group or approver
+        function jQueryAjaxPost (form) {
+            try {
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        if (res.isValid) {
+
+                            if (form.action.indexOf("Approver") >= 0) {
+                                $('#approver-modal .modal-body').html('');
+                                $('#approver-modal').modal('hide');
+                            }
+                            else {
+                                FormHide();
+                            }
+
+                            isSuccessPost = true;
+                            AlertSuccess();
+                        }
+                        else {
+                            FormShow(res.html, res.error);
+                            isSuccessPost = false;
+                        }
+                    },
+                    error: function (err) {
+                        isSuccessPost = false;
+                        FormHide();
+                        AlertError();
+                        console.log(err)
+                    }
+                }).done(function () {
+                    //unobstrusive validation
+                    $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                    $.validator.unobtrusive.parse("form");
+                });
+                //to prevent default form submit event
+                return false;
+            } catch (ex) {
+                isSuccessPost = false;
+                FormHide();
+                AlertError()
+                console.log(ex)
+            }
+        }
+
+        //save anscestors evry 'Go Inside'
+        var pathToNodes = []
+
+        //get all group descendants
+        var groupAjaxTable = function (anscestors, isStayCurrent) {
+            $(".approver").hide();
+            $(".group").show();
+            return $("#grouptable").DataTable({
+                destroy:true,
+                ajax: {
+                    url: "/RefGroup/GetGroupDescendants",
+                    type: "POST",
+                    datatype: "json",
+                    data: {
+                        pathToNode: anscestors
+                    },
+                    dataSrc: function (json) {
+                        $("#backToGroups").hide();
+                        $("#addApprover").hide();
+                        $("#addGroup").show();
+
+                        if (!isStayCurrent)
+                            pathToNodes.push(anscestors)
+
+                        if (pathToNodes.length == 1)
+                            $("#backBtn").hide();
+                        else
+                            $("#backBtn").show();
+                        return json.data;
+                    },
+
+                },
+                columnDefs: [
+                    {   targets: '_all', defaultContent: '-' },
+                    {   targets: 0, className: 'dtr-control', orderable: false}
+                ],
+                columns: [
+                    {   defaultContent: ""  },
+                    {
+                        data: "groupName", autoWidth: true, render: function (data, type, row) {
+                            return EditLink('@Url.Action("AddOrEdit", "RefGroup")/'+row.id+'','Group Information',data);
+                        }
+                    },
+                    {
+                        autoWidth: true,
+                        render: function (data, type, row) {
+                            if (!row.requiredManager) {
+                                return '-'
+                            }
+
+                            return row.managerName
+                        }
+                    },
+                    {
+                        autoWidth: true,
+                        render: function (data, type, row) {
+                            if (!row.requiredApprover) {
+                                return '-'
+                            }
+
+                            return  '<a href="#" onclick="return approverAjaxTable(&quot;' + row.id
+                                + '&quot;,&quot;LEAVE&quot;)">Leave</a> &nbsp;| &nbsp;<a href="#" onclick="return approverAjaxTable(&quot;' + row.id
+                                + '&quot;,&quot;OVERTIME&quot;)">Overtime</a>&nbsp;| &nbsp;<a href="#" onclick="return approverAjaxTable(&quot;' + row.id
+                                    + '&quot;,&quot;DTR&quot;)">DTR</a>';
+                         }
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return '<a href="#" onclick="return groupAjaxTable(&quot;' + GetFullPathToNode(pathToNodes) + row.id
+                                +',&quot;)">Go Inside</a> &nbsp;| &nbsp;'+ DeleteLink('@Url.Action("Delete", "RefGroup")/'+row.id+'');
+                        }
+                    },
+                ],
+                order: [1, "asc"],
+                filter: true,
+                processing: "true",
+                language: {
+                    "processing": "Processing... Please wait"
+                }
+            });
+        };
+        //get all group approvers
+        var approverAjaxTable = function (id, type) {
+            $(".group").hide();
+            $(".approver").show();
+            type_approver = type;
+            group_id = id;
+
+            return $("#approvertable").DataTable({
+                destroy: true,
+                ajax: {
+                    url: "/RefGroup/GetGroupApprovers",
+                    type: "POST",
+                    datatype: "json",
+                    data: {
+                         id: id,
+                         type: type
+                    },
+                    dataSrc: function (res) {
+                        $("#title").html("<b>" + type + "</b> Approvers");
+                        $("#backToGroups").show();
+                        $("#addApprover").show();
+                        $("#addGroup").hide();
+                        $("#backBtn").hide();
+                        //prevent already approver to autocomplete
+                        approverNames = res.data.map(function (row) {
+                            return row.approverName
+                        });
+                        return res.data;
+                    },
+
+                },
+                columnDefs: [
+                    {   targets: '_all', defaultContent: '-' },
+                    {   targets: 0,className: 'dtr-control',orderable: false }
+                ],
+                columns: [
+                    {   defaultContent: ""  },
+                    {   data: "approverOrder", autoWidth: true},
+                    {   data: "approverName",  autoWidth: true },
+                    {   data: "requiredApproval", autoWidth: true, render: table_checkbox },
+                    {
+                        render: function (data, type, row) {
+                            return DeleteLink('@Url.Action("DeleteApprover", "RefGroup")?userId='
+                                + row.approverUserId + '&type=' + row.type + '&groupId=' + row.groupId + '"');
+                    }
+                },
+                ],
+                order: [1, "asc"],
+                filter: true,
+                processing: "true",
+                language: {
+                    "processing": "Processing... Please wait"
+                }
+            });
+        };
+
+
+        var type_approver;
+        var group_id;
+        //get string fullpath of ancestors
+        function GetFullPathToNode (pathToNodes)  {
+            var path="";
+            jQuery.each(pathToNodes, function (index, item) {
+                if (item !=null) {
+                    path += item
+                }
+            });
+
+            return path;
+        }
+
+        //get employees fullname
+        function GetEmployeesAjax() {
+            return $.ajax({
+                type: "get",
+                url: "/Employee/GetFullNames"
+            });
+        }
+
+        $(document).ready(function () {
+
+            groupAjaxTable(null, false).ajax.reload(null, false);
+
+
+            //back buttons
+            $("#backBtn").click(function () {
+                pathToNodes.splice(-1, 1);
+                groupAjaxTable(pathToNodes[pathToNodes.length - 1], true).ajax.reload(null, false);
+
+            });
+            $("#backToGroups").click(function () {
+                groupAjaxTable(pathToNodes[pathToNodes.length - 1], true).ajax.reload(null, false);
+                $("#title").text("Company List");
+            });
+
+            //refresh grid after submit
+            $('#form-modal').on('hidden.bs.modal', function () {
+                if (isSuccessPost) {
+                    groupAjaxTable(pathToNodes[pathToNodes.length - 1], true).ajax.reload(null, false);
+                    isSuccessPost = false;
+                }
+            })
+
+            //refresh grid after submit
+            $('#approver-modal').on('hidden.bs.modal', function () {
+                if (isSuccessPost) {
+                    approverAjaxTable(group_id, type_approver).ajax.reload(null, false);
+                    isSuccessPost = false;
+                }
+            })
+
+        });
+
+    </script>
+
+}

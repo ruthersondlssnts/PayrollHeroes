@@ -1,0 +1,44 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Leave Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="main">
+
+                    <input type="hidden" id="request_leave_id" />
+                    <div class="form-group">
+                        <label for="Name">Date</label>
+                        <input type="text" class="form-control" id="leave_date" placeholder="Date" />
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="custom-select" id="ref_leave_type_id"></select>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Day</label>
+                        <select class="custom-select" id="leave_day">
+                            <option value="1">1</option>
+                            <option value="0.5">0.5</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Name">Reason</label>
+                        <input type="text" class="form-control" id="reason" placeholder="Reason" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSave" style="display:none;" onclick="Update();">Save</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                <button type="button" class="btn btn-danger" id="btnDelete" style="display:none;" onclick="Delete();">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

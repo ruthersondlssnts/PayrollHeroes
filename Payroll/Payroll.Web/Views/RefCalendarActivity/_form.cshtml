@@ -1,0 +1,35 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Holiday Details</h4>
+            </div>
+            <div class="modal-body">
+                <form id="main">
+
+                    <input type="hidden" id="ref_calendar_activity_id" />
+
+                    <div class="form-group">
+                        <label for="Name">Date</label>
+                        <input type="text" class="form-control" id="work_date" placeholder="Date" />
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="custom-select" id="ref_day_type_id"></select>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="Description" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnSave" style="display:none;" onclick="Update();">Save</button>
+                <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

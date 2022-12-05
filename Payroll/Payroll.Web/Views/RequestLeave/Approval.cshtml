@@ -1,0 +1,43 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Leave Approval";
+
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sm-3">
+                    @*<div class="form-group">
+                            <label>&nbsp;</label>
+                            <button type="button" class="btn btn-block btn-default" id="process" onclick="return getbyID()">Request Leave</button>
+                        </div>*@
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Leave Approval</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="jsGrid1"></div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+
+<partial name="_formapproval" />
+
+@section scripts {
+
+    <script src="~/js/app/RequestLeave/validation.js"></script>
+    <script src="~/js/app/RequestLeave/get.js"></script>
+    <script src="~/js/app/RequestLeave/grid_approval.js"></script>
+    <script src="~/js/app/RequestLeave/update.js"></script>
+    <script src="~/js/app/RequestLeave/_initialize.js"></script>
+}

@@ -1,0 +1,41 @@
+﻿@model TPS.Frontend.Infrastructure.RefPagibig
+@{
+    Layout = null;
+}
+<div class="alert alert-danger" role="alert" id="error-summary">
+</div>
+<form asp-action="AddOrEdit" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <input type="hidden" asp-for="CreateDate" />
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Name" />
+    </div>
+
+    <div class="form-group">
+        <label for="SalaryFrom">Salary From</label>
+        <input type="text" class="form-control" asp-for="SalaryFrom" placeholder="Salary From" />
+    </div>
+    <div class="form-group">
+        <label for="SalaryTo">Salary To</label>
+        <input type="text" class="form-control" asp-for="SalaryTo" placeholder="Salary To" />
+    </div>
+    <div class="form-group">
+        <label for="EmployeeContribution">Employer Contribution</label>
+        <input type="text" class="form-control" asp-for="EmployeeContribution" placeholder="Employee Contribution" />
+    </div>
+    <div class="form-group">
+        <label for="EmployerContribution">Employer Contribution</label>
+        <input type="text" class="form-control" asp-for="EmployerContribution" placeholder="Employer Contribution" />
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" asp-for="FlatRate" />
+            <label class="form-check-label" for="FlatRate">FlatRate</label>
+        </div>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>

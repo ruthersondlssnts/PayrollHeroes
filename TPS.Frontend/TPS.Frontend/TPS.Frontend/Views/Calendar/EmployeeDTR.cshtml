@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Employee DTR Calendar";
+}
+<!-- fullCalendar -->
+<link href="~/plugins/fullcalendar/main.css" rel="stylesheet" />
+<style>
+    .external-event:hover {
+        box-shadow: none !important;
+    }
+
+    .external-event {
+        cursor: auto
+    }
+</style>
+<div class="row">
+    <!--<div class="col-md-3">
+        <div class="sticky-top mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"> Status</h4>
+                </div>
+                <div class="card-body">-->
+                    <!-- the events -->
+                    <!--<div id="external-events">
+                        <div class="external-event bg-success">Approved</div>
+                        <div class="external-event bg-info">For Approval</div>
+
+                    </div>
+                </div>-->
+                <!-- /.card-body -->
+            <!--</div>-->
+            <!-- /.card -->
+
+        <!--</div>
+    </div>-->
+    <!-- /.col -->
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-body p-0">
+                <!-- THE CALENDAR -->
+                <div id="calendar"></div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+@section scripts {
+    <script src="~/plugins/fullcalendar/main.js"></script>
+
+    <!-- AdminLTE~or demo purposes -->
+    <!-- Page specific script -->
+
+    <script>
+
+        $(function () {
+            $('[data-toggle="tooltip"]').popover()
+
+            var Calendar = FullCalendar.Calendar;
+            var calendarEl = document.getElementById('calendar');
+
+            // initialize the external events
+            // -----------------------------------------------------------------
+
+            var calendar = new Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth'
+                },
+                timezone: 'local',
+                fixedWeekCount: false,
+                themeSystem: 'bootstrap',
+                displayEventTime: false,
+                eventDisplay: "block",
+                events: function (info, successCallback, failureCallback) {
+                    Swal.fire({
+                        title: 'Please Wait..!',
+                        text: 'Is working..',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        onOpen: () => {
+                            swal.showLoading()
+                        }
+                    });
+                    var start = info.startStr.split('T');
+                    var end = info.endStr.split('T');
+                    new_url = "/Calendar/dtr?start=" + start[0] + "&end=" + end[0];
+
+                    $.ajax({
+                        url: new_url,
+                        dataType: 'json',
+                        type: 'GET',
+                        success: function (response) {
+                            Swal.close();
+                            successCallback(response);
+                        }
+                    })
+                },
+                eventClassNames: function (arg) {
+                    //switch (arg.event.extendedProps.absent) {
+                    //    case true:
+                    //        return ['bg-danger'];
+                    //    case false:
+                    //        return ['bg-info'];
+                    //    default:
+                    //}
+                },
+                eventDidMount: function (info) {
+                    var el = info.el
+                    
+                    $(el).popover({
+                        title: "<b>" + info.event.title + "</b>",
+                        content: info.event.extendedProps.content,
+                        trigger: "hover focus",
+                        container: 'body',
+                        animation: true,
+                        placement: "top",
+                        html: true
+                    });
+                }
+            });
+
+            calendar.render();
+
+
+        });
+
+        function GetCurrentDisplayedMonth() {
+            var date = new Date($('#myCalendar').fullCalendar('getDate'));
+            var month_int = date.getMonth();
+            return month_int;
+        }
+    </script>
+}
